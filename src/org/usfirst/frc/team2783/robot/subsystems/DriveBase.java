@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
 import org.usfirst.frc.team2783.robot.RobotMap;
-import org.usfirst.frc.team2783.robot.commands.BasicDrive;
+import org.usfirst.frc.team2783.robot.commands.SteerableTankDrive;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -20,7 +20,7 @@ public class DriveBase extends Subsystem{
 	}
 	
     public void initDefaultCommand() {
-        setDefaultCommand(new BasicDrive());
+        setDefaultCommand(new SteerableTankDrive());
     }
     
     public void tankDrive(double leftValue, double rightValue) {

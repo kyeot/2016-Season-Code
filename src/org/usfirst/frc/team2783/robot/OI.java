@@ -34,7 +34,6 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	public static Joystick leftDriveJoystick = new Joystick(RobotMap.LEFT_JOYSTICK_ID);
-	public static Joystick rightDriveJoystick = new Joystick(RobotMap.RIGHT_JOYSTICK_ID);
+	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
 }
 
