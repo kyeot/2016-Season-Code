@@ -16,8 +16,8 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
-	final public static int LEFT_JOYSTICK_ID = 1;
-	final public static int RIGHT_JOYSTICK_ID = 2;
+	final public static int LEFT_JOYSTICK_ID = 0;
+	final public static int RIGHT_JOYSTICK_ID = 1;
 	
 	final public static int REAR_LEFT_MOTOR_ID = 3;
 	final public static int REAR_RIGHT_MOTOR_ID = 12;

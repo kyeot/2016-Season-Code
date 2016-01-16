@@ -16,9 +16,11 @@ public class DriveBase extends Subsystem{
 			);
 	
 	public DriveBase() {
+		/*
 		super();
 		this.driveBase.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
 		this.driveBase.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		*/
 	}
 	
     public void initDefaultCommand() {

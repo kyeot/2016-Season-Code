@@ -20,8 +20,8 @@ public class BasicDrive extends Command{
 	    // Called repeatedly when this Command is scheduled to run
 	    protected void execute() {
 	    	Robot.driveBase.tankDrive(
-	    		OI.leftDriveJoystick.getRawAxis(2),
-	    		OI.rightDriveJoystick.getRawAxis(2));
+	    		OI.leftDriveJoystick.getRawAxis(1),
+	    		OI.rightDriveJoystick.getRawAxis(1));
 	    }
 
 	    // Make this return true when this Command no longer needs to run execute()
