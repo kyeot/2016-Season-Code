@@ -21,7 +21,7 @@ public class SteerableTankDrive extends Command{
 		    protected void execute() {
 		    	Double throttleValue = OI.xBoxController.getRawAxis(3) 
 		    					     - OI.xBoxController.getRawAxis(2);
-		    	Double skewValue = OI.xBoxController.getRawAxis(1);
+		    	Double skewValue = OI.xBoxController.getRawAxis(0);
 		    	
 		    	Double leftOutput = throttleValue + (throttleValue * skewValue);
 		    	Double rightOutput = throttleValue - (throttleValue * skewValue);
