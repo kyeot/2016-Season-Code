@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team2783.robot;
 
+import java.io.IOException;
+
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -25,6 +27,15 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		
+		//Start GRIP in a new process
+		try {
+			Runtime.getRuntime().exec(new String[] {
+			        "/usr/local/frc/JRE/bin/java", "-jar",
+			        "/home/lvuser/grip.jar", "/home/lvuser/project.grip" });
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
     }
 	
 	/**
