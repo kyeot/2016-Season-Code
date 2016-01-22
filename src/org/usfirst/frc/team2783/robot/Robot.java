@@ -3,6 +3,7 @@ package org.usfirst.frc.team2783.robot;
 
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -25,6 +26,10 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		CameraServer usbCameraServer = CameraServer.getInstance();
+        usbCameraServer.setQuality(50);
+        //the camera name (ex "cam0") can be found through the roborio web interface
+        usbCameraServer.startAutomaticCapture("cam1");
     }
 	
 	/**
