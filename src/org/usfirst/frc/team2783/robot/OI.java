@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.pivotTankDrive;
+import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -44,8 +44,8 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public OI() {
-		pivotLeftTrigger.whileActive(new pivotTankDrive());
-		pivotRightTrigger.whileActive(new pivotTankDrive());
+		pivotLeftTrigger.whileActive(new PivotTankDrive());
+		pivotRightTrigger.whileActive(new PivotTankDrive());
 	}
 	
 }

@@ -5,7 +5,7 @@ import org.usfirst.frc.team2783.robot.OI;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SteerableTankDrive extends Command{
+public class SteerableTankDrive extends Command {
 			
 		    public SteerableTankDrive() {
 		    	requires(Robot.driveBase);

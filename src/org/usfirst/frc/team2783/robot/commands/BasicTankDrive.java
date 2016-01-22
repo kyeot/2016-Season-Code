@@ -5,7 +5,7 @@ import org.usfirst.frc.team2783.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class BasicTankDrive extends Command{
+public class BasicTankDrive extends Command {
 		
 	    public BasicTankDrive() {
 	        // Use requires() here to declare subsystem dependencies

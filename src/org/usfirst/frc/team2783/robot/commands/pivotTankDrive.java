@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class pivotTankDrive extends Command {
+public class PivotTankDrive extends Command {
 
-    public pivotTankDrive() {
+    public PivotTankDrive() {
     	requires(Robot.driveBase);
     }
 
@@ -34,6 +34,7 @@ public class pivotTankDrive extends Command {
 			leftOutput = OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2);
     		rightOutput = -(OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2));
 		}
+    	
     	//Sends pivot value to drive train
     	Robot.driveBase.tankDrive(leftOutput, rightOutput);
     }
