@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SteerableTankDrive extends Command{
 			
 		    public SteerableTankDrive() {
-		        // Use requires() here to declare subsystem dependencies
-		        // eg. requires(chassis);
 		    	requires(Robot.driveBase);
 		    }
 
@@ -19,9 +17,11 @@ public class SteerableTankDrive extends Command{
 
 		    // Called repeatedly when this Command is scheduled to run
 		    protected void execute() {
+		    	//Declares throttle value based on xbox controllers, and skewValue on left joystick
 		    	Double throttleValue = OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2);
 		    	Double skewValue = 0.5 * OI.xBoxController.getRawAxis(0);
 		    	
+		    	//Sets left and right values using throttle and skew
 		    	Double leftOutput = throttleValue + (throttleValue * skewValue);
 		    	Double rightOutput = throttleValue - (throttleValue * skewValue);
 		    	

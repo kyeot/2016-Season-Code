@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class pivotTankDrive extends Command {
 
     public pivotTankDrive() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.driveBase);
     }
 
@@ -23,15 +21,20 @@ public class pivotTankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double leftOutput = 0, rightOutput = 0;
+    	
+    	//Uses the Dpad value of 270 to pivot to the left
     	if(OI.xBoxController.getPOV() == 270){
+    		//Sets the left value opposite to right in order to pivot left
     		leftOutput = -(OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2));
     		rightOutput = OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2);
     		
+    	//Uses the Dpad value of 90 to pivot to the right
 		} else if(OI.xBoxController.getPOV() == 90) {
+			//Sets the right value opposite to left in order to pivot right
 			leftOutput = OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2);
     		rightOutput = -(OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2));
-			
 		}
+    	//Sends pivot value to drive train
     	Robot.driveBase.tankDrive(leftOutput, rightOutput);
     }
 
