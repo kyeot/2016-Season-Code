@@ -1,6 +1,10 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.pivotTankDrive;
+import org.usfirst.frc.team2783.robot.triggers.Dpad;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the Ocontrols on the physical operator
@@ -35,5 +39,14 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
+	
+	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
+	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
+	
+	public OI() {
+		pivotLeftTrigger.whileActive(new pivotTankDrive());
+		pivotRightTrigger.whileActive(new pivotTankDrive());
+	}
+	
 }
 
