@@ -5,9 +5,9 @@ import org.usfirst.frc.team2783.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class BasicDrive extends Command{
+public class BasicTankDrive extends Command {
 		
-	    public BasicDrive() {
+	    public BasicTankDrive() {
 	        // Use requires() here to declare subsystem dependencies
 	        // eg. requires(chassis);
 	    	requires(Robot.driveBase);
@@ -20,8 +20,8 @@ public class BasicDrive extends Command{
 	    // Called repeatedly when this Command is scheduled to run
 	    protected void execute() {
 	    	Robot.driveBase.tankDrive(
-	    		-OI.leftDriveJoystick.getRawAxis(1),
-	    		-OI.rightDriveJoystick.getRawAxis(1));
+	    		OI.xBoxController.getRawAxis(1),
+	    		OI.xBoxController.getRawAxis(5));
 	    }
 
 	    // Make this return true when this Command no longer needs to run execute()

@@ -1,6 +1,10 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
+import org.usfirst.frc.team2783.robot.triggers.Dpad;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -8,7 +12,15 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	
-	public static Joystick leftDriveJoystick = new Joystick(RobotMap.LEFT_JOYSTICK_ID);
-	public static Joystick rightDriveJoystick = new Joystick(RobotMap.RIGHT_JOYSTICK_ID);
+	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
+	
+	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
+	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
+	
+	public OI() {
+		pivotLeftTrigger.whileActive(new PivotTankDrive());
+		pivotRightTrigger.whileActive(new PivotTankDrive());
+	}
+	
 }
 

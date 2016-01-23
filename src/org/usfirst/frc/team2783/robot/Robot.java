@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	
-	public static final DriveBase driveBase = new DriveBase();
 	public static OI oi;
+	public static final DriveBase driveBase = new DriveBase();
 
     /**
      * This function is run when the robot is first started up and should be
