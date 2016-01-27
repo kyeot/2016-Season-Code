@@ -8,7 +8,9 @@ package org.usfirst.frc.team2783.robot;
 public class RobotMap {
 
 	final public static int XBOX_CONTROLLER_ID = 0;
+	final public static int SHOOTER_JOYSTICK_ID = 1;
 	
+	final public static int SHOOTER_WHEEL_MOTOR_ID = 0; //default setting. Motor ID unknown. CHANGE ME
 	final public static int FRONT_LEFT_MOTOR_ID = 12;
 	final public static int REAR_LEFT_MOTOR_ID = 13;
 	final public static int FRONT_RIGHT_MOTOR_ID = 3;

@@ -13,14 +13,14 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 public class OI {
 	
 	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
-	
+	public static Joystick manipulator = new Joystick(RobotMap.SHOOTER_JOYSTICK_ID);
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
+		
 	}
 	
 }
-
