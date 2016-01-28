@@ -29,6 +29,7 @@ public class ShootOnly extends Command {
     	//5000 is the max rpm for motor/wheel
     	double wheelRpm = manipulatorInputPercent * 5000;
     	
+    	Robot.shooterBase.setWheelControlMode(1);
     	Robot.shooterBase.setWheelSpeed(wheelRpm);
     }
     

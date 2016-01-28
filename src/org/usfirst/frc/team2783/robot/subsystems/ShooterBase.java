@@ -9,17 +9,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterBase extends Subsystem {
 	private CANTalon shooterWheel = new CANTalon(RobotMap.SHOOTER_WHEEL_MOTOR_ID);
 
-	
 	public ShooterBase() {
 		super();
 	}
 
-	@Override
-	protected void initDefaultCommand() {
+	public void initDefaultCommand() {
 		setDefaultCommand(new ShootOnly());
 	}
+	
 	public void setWheelSpeed(double rpmOutput) {
 		shooterWheel.set(rpmOutput);
 	}
-
+	
+	public void setWheelControlMode(int mode) {
+		shooterWheel.setControlMode(mode);
+	}
 }
