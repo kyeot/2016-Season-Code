@@ -23,13 +23,12 @@ public class ShootOnly extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	 // manipulatorInput will be a number -1 to 1
-    	double manipulatorInput = OI.manipulator.getRawAxis(3);
-    	// Assigns input to number 0 to 1 or 0 to 100%
-    	double manipulatorInputPercent = (manipulatorInput -= 1)/2;
-    	//5000 is the max rpm for motor/wheel
-    	double wheelRpm = manipulatorInputPercent * 5000;
+    	double manipulatorInput = OI.manipulator.getRawAxis(2);
+    	// Assigns input to number 0 to 2
+    	manipulatorInput += 1;
+    	//4000 is the supposed max rpm for motor/wheel (0 to 2 * 2000 = 0 to 4000)
+    	double wheelRpm = manipulatorInput * 2000;
     	
-    	Robot.shooterBase.setWheelControlMode(1);
     	Robot.shooterBase.setWheelSpeed(wheelRpm);
     }
     

@@ -7,10 +7,12 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ShooterBase extends Subsystem {
-	private CANTalon shooterWheel = new CANTalon(RobotMap.SHOOTER_WHEEL_MOTOR_ID);
-
+	CANTalon shooterWheel;
+	
 	public ShooterBase() {
 		super();
+		shooterWheel = new CANTalon(RobotMap.SHOOTER_WHEEL_MOTOR_ID);
+		shooterWheel.setControlMode(0); // value for quad encoder. Does not work(FeedbackDevice.AnalogEncoder) 3 equals analog encoder
 	}
 
 	public void initDefaultCommand() {
@@ -21,7 +23,5 @@ public class ShooterBase extends Subsystem {
 		shooterWheel.set(rpmOutput);
 	}
 	
-	public void setWheelControlMode(int mode) {
-		shooterWheel.setControlMode(mode);
-	}
+
 }
