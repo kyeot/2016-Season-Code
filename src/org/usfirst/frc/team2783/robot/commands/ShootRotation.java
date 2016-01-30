@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShootOnly extends Command {
+public class ShootRotation extends Command {
 
-    public ShootOnly() {
+    public ShootRotation() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-       	requires(Robot.shooterBase);
+    	requires(Robot.shooterBase);
     }
 
     // Called just before this Command runs the first time
@@ -22,16 +22,19 @@ public class ShootOnly extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	 // manipulatorInput will be a number -1 to 1
-    	double manipulatorInput = OI.manipulator.getRawAxis(2);
-    	// Assigns input to number 0 to 2
-    	manipulatorInput += 1;
-    	//4000 is the supposed max rpm for motor/wheel (0 to 2 * 2000 = 0 to 4000)
-    	double wheelRpm = manipulatorInput * 2000;
-    	
-    	Robot.shooterBase.setWheelSpeed(wheelRpm);
-    }
-    
+   	 // manipulatorInput for wheel will be a number -1 to 1
+   	double manipulatorWheelInput = OI.manipulator.getRawAxis(2);
+   	// Assigns input to number 0 to 2
+   	manipulatorWheelInput += 1;
+   	//4000 is the supposed max rpm for motor/wheel (0 to 2 * 2000 = 0 to 4000)
+   	double wheelRpm = manipulatorWheelInput * 2000;
+   	
+   	Robot.shooterBase.setWheelSpeed(wheelRpm);
+   	
+   	// manipulator input for horizontal rotation
+   	double manipulatorAxisInput = OI.manipulator.getRawAxis(1); //CHANGEME default value set for joystick
+   	//
+}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
