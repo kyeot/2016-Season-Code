@@ -10,11 +10,11 @@ public class RobotMap {
 	final public static int XBOX_CONTROLLER_ID = 0;
 	final public static int SHOOTER_JOYSTICK_ID = 1;
 	
-	final public static int SHOOTER_HORIZONTAL_AXIS_MOTOR = 0; //default setting. Motor ID unknown. CHANGE ME
-	final public static int SHOOTER_VERTICAL_AXIS_MOTOR = 1; //default setting. Motor ID unknown. CHANGE ME
-	final public static int SHOOTER_WHEEL_MOTOR_ID = 4; //default setting. Motor ID unknown. CHANGE ME
-	final public static int FRONT_LEFT_MOTOR_ID = 12;
+	final public static int SHOOTER_HORIZONTAL_AXIS_MOTOR = 14; //default setting. Motor ID unknown. CHANGE ME
+	final public static int SHOOTER_VERTICAL_AXIS_MOTOR = 12; //default setting. Motor ID unknown. CHANGE ME
+	final public static int SHOOTER_WHEEL_MOTOR_ID = 2; //default setting. Motor ID unknown. CHANGE ME
+	final public static int FRONT_LEFT_MOTOR_ID = 19;
 	final public static int REAR_LEFT_MOTOR_ID = 13;
 	final public static int FRONT_RIGHT_MOTOR_ID = 3;
-	final public static int REAR_RIGHT_MOTOR_ID = 2;
+	final public static int REAR_RIGHT_MOTOR_ID = 123;
 }
