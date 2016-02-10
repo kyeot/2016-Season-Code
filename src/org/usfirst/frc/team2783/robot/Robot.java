@@ -3,8 +3,12 @@ package org.usfirst.frc.team2783.robot;
 
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -17,10 +21,19 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	
+	public static AHRS ahrs;
 	public static OI oi;
 	public static final DriveBase driveBase = new DriveBase();
-
-    /**
+	
+	public Robot(){
+		 try {
+	         ahrs = new AHRS(SPI.Port.kMXP);
+	     } catch (RuntimeException ex ) {
+	         DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+	     }
+	}
+	
+    /*
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */

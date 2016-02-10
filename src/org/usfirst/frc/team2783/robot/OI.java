@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.GyroCorrectedTankDrive;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
@@ -16,10 +17,14 @@ public class OI {
 	
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
+	Trigger moveForwardTrigger = new Dpad(xBoxController, 0);
+	Trigger moveDownwardTrigger = new Dpad(xBoxController, 180);
 	
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
+		moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
+		moveDownwardTrigger.whileActive(new GyroCorrectedTankDrive());
 	}
 	
 }
