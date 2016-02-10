@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class ShooterBase extends Subsystem {
 	CANTalon shooterWheel;
-	CANTalon pitch;
-	CANTalon yaw;
+	CANTalon verticalAxisMotor;
+	CANTalon horizontalAxisMotor;
 	AnalogInput horizontalAbsEncoder = new AnalogInput(0);
 	AnalogInput verticalAbsEncoder = new AnalogInput(1);
 
@@ -24,17 +24,15 @@ public class ShooterBase extends Subsystem {
 		shooterWheel.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		shooterWheel.changeControlMode(TalonControlMode.Speed);
 		shooterWheel.configEncoderCodesPerRev(40);
-		//shooterWheel.configNominalOutputVoltage(0, 0);
-		//shooterWheel.configPeakOutputVoltage(12, -12);
 		shooterWheel.reverseSensor(true);
-		shooterWheel.setP(16.0);
-		shooterWheel.setI(0.35);
-		shooterWheel.setD(0.0);
+		shooterWheel.setP(16.0); //change these values
+		shooterWheel.setI(0.35); //change these values
+		shooterWheel.setD(0.0); // change these values
 		shooterWheel.setF(0);	
 		
-		pitch = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
+		verticalAxisMotor = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
 		
-		yaw = new CANTalon(RobotMap.SHOOTER_HORIZONTAL_AXIS_MOTOR);
+		horizontalAxisMotor = new CANTalon(RobotMap.SHOOTER_HORIZONTAL_AXIS_MOTOR);
 	}
 
 	public void initDefaultCommand() {
@@ -47,19 +45,25 @@ public class ShooterBase extends Subsystem {
 		System.out.println(shooterWheel.getEncVelocity());
 	}
 	
-	public void setVerticalVbus(double output) {
-		yaw.set(output);
+	// outputs value to vertical axis motor
+public void setVerticalVbus(double output) {
+		verticalAxisMotor.set(output);
 	}
 	
+	// outputs value to horizontal axis motor
 	public void setHorizontalVbus(double output) {
-		pitch.set(output);
+		horizontalAxisMotor.set(output);
 	}
 	
-	public double getHorizontalValueDegree() {
+	// returns encoder value
+	public double getHorizontalValueDegrees() {
+		// turns voltage signal from encoder to degrees
 		return (horizontalAbsEncoder.getVoltage() / 5) * 360;			
 	}
 	
+	//returns encoder value
 	public double getVerticalValueDegrees() {
+		// turns voltage signal from encoder to degrees
 		return (verticalAbsEncoder.getVoltage() / 5) * 360;
 	}
 }
