@@ -1,48 +1,65 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
 import org.usfirst.frc.team2783.robot.RobotMap;
-import org.usfirst.frc.team2783.robot.commands.AbsoluteMagenticEncoderTest;
-import org.usfirst.frc.team2783.robot.commands.ShootRotation;
+import org.usfirst.frc.team2783.robot.commands.BasicShooterDrive;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CANSpeedController.ControlMode;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class ShooterBase extends Subsystem {
 	CANTalon shooterWheel;
-	CANTalon horizontalAxis;
-	CANTalon verticalAxis;
-	
+	CANTalon pitch;
+	CANTalon yaw;
+	AnalogInput horizontalAbsEncoder = new AnalogInput(0);
+	AnalogInput verticalAbsEncoder = new AnalogInput(1);
+
 	public ShooterBase() {
 		super();
+		
 		shooterWheel = new CANTalon(RobotMap.SHOOTER_WHEEL_MOTOR_ID);
-		shooterWheel.changeControlMode(TalonControlMode.Speed); // value for quad encoder. Does not work(FeedbackDevice.AnalogEncoder)3 equals analog encoder
-		shooterWheel.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
-		horizontalAxis = new CANTalon(RobotMap.SHOOTER_HORIZONTAL_AXIS_MOTOR);
-		horizontalAxis.changeControlMode(TalonControlMode.Position);
-		horizontalAxis.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		verticalAxis = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);		
-		verticalAxis.changeControlMode(TalonControlMode.Position);
-		verticalAxis.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		shooterWheel.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		shooterWheel.changeControlMode(TalonControlMode.Speed);
+		shooterWheel.configEncoderCodesPerRev(40);
+		//shooterWheel.configNominalOutputVoltage(0, 0);
+		//shooterWheel.configPeakOutputVoltage(12, -12);
+		shooterWheel.reverseSensor(true);
+		shooterWheel.setP(16.0);
+		shooterWheel.setI(0.35);
+		shooterWheel.setD(0.0);
+		shooterWheel.setF(0);	
+		
+		pitch = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
+		
+		yaw = new CANTalon(RobotMap.SHOOTER_HORIZONTAL_AXIS_MOTOR);
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new AbsoluteMagenticEncoderTest());
+		setDefaultCommand(new BasicShooterDrive());		
 	}
 	
 	public void setWheelSpeed(double rpmOutput) {
 		shooterWheel.set(rpmOutput);
+		System.out.println(shooterWheel.getPosition());
+		System.out.println(shooterWheel.getEncVelocity());
 	}
 	
-	public void setHorizontalAxis(double degrees) {
-		//Testing for correct input using Abs Mag Encoder
-		verticalAxis.setPosition(degrees);
-		//horizontalAxis.set(rpmOutput);
+	public void setVerticalVbus(double output) {
+		yaw.set(output);
 	}
-	public void setVerticalAxis(double output) {
-		verticalAxis.set(output);
+	
+	public void setHorizontalVbus(double output) {
+		pitch.set(output);
+	}
+	
+	public double getHorizontalValueDegree() {
+		return (horizontalAbsEncoder.getVoltage() / 5) * 360;			
+	}
+	
+	public double getVerticalValueDegrees() {
+		return (verticalAbsEncoder.getVoltage() / 5) * 360;
 	}
 }
