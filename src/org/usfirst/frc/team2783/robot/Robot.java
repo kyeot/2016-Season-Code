@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2783.robot;
 
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
+import org.usfirst.frc.team2783.robot.subsystems.PickUp;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -19,6 +20,8 @@ public class Robot extends IterativeRobot {
 	
 	public static OI oi;
 	public static final DriveBase driveBase = new DriveBase();
+	public static final DriveBase liftArm = new DriveBase();
+	public static final PickUp pickUp = new PickUp();
 
     /**
      * This function is run when the robot is first started up and should be
