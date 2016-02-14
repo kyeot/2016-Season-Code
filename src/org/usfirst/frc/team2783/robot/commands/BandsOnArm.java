@@ -1,17 +1,15 @@
 package org.usfirst.frc.team2783.robot.commands;
 
-import org.usfirst.frc.team2783.robot.OI;
-import org.usfirst.frc.team2783.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team2783.robot.Robot;
 
 /**
  *
  */
-public class PickUpArm extends Command {
-
+public class BandsOnArm extends Command {
 	
-    public PickUpArm() {
+    public BandsOnArm() {
     	requires(Robot.pickUp);
     }
 
@@ -19,9 +17,7 @@ public class PickUpArm extends Command {
     }
 
     protected void execute() {
-    	Double throttleValue = OI.liftJoy.getRawAxis(3);
-    	Robot.pickUp.setPercentVBusArm(throttleValue);
-    	
+        Robot.pickUp.suckUpMotor.set(1);
     }
 
     protected boolean isFinished() {

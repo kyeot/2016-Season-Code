@@ -20,7 +20,6 @@ public class Robot extends IterativeRobot {
 	
 	public static OI oi;
 	public static final DriveBase driveBase = new DriveBase();
-	public static final DriveBase liftArm = new DriveBase();
 	public static final PickUp pickUp = new PickUp();
 
     /**

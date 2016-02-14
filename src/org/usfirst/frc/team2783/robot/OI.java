@@ -1,15 +1,14 @@
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.ArmBand;
+import org.usfirst.frc.team2783.robot.commands.LiftBall;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
-import org.usfirst.frc.team2783.robot.commands.SuckIn;
+import org.usfirst.frc.team2783.robot.commands.BandsOnArm;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OI {
 	
-public static Joystick liftJoy = new Joystick(1);
+	public static Joystick liftJoy = new Joystick(1);
 	
 	Button button1 = new JoystickButton(liftJoy, 1);
 	Button button2 = new JoystickButton(liftJoy, 2);
@@ -29,8 +28,8 @@ public static Joystick liftJoy = new Joystick(1);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public OI() {
-		button1.toggleWhenPressed(new ArmBand());
-		button2.toggleWhenPressed(new SuckIn());
+		button1.toggleWhenPressed(new LiftBall());
+		button2.toggleWhenPressed(new BandsOnArm());
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		                                                                         
