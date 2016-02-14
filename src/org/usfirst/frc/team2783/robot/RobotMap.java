@@ -15,6 +15,6 @@ public class RobotMap {
 	final public static int REAR_RIGHT_MOTOR_ID = 14;
 	final public static int LIFT_BALL_UP_MOTOR_ID = 12;
 	final public static int TURN_BANDS_ON_ARM_MOTOR_ID = 11;
-	final public static int TURN_PICKUP_ARM_MOTOR_ID = 2;
+	final public static int TURN_PICK_UP_ARM_MOTOR_ID = 2;
 
 }

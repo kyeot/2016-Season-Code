@@ -1,8 +1,8 @@
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.LiftBall;
+import org.usfirst.frc.team2783.robot.commands.LiftBallUp;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
-import org.usfirst.frc.team2783.robot.commands.BandsOnArm;
+import org.usfirst.frc.team2783.robot.commands.TurnBandsOnArm;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,8 +28,8 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public OI() {
-		button1.toggleWhenPressed(new LiftBall());
-		button2.toggleWhenPressed(new BandsOnArm());
+		button1.toggleWhenPressed(new LiftBallUp());
+		button2.toggleWhenPressed(new TurnBandsOnArm());
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		                                                                         
