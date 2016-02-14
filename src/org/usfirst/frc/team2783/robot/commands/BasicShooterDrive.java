@@ -25,13 +25,10 @@ public class BasicShooterDrive extends Command {
     	// manipulatorInput for wheel -1 to 1
     	double manipulatorWheelOutput = OI.manipulator.getRawAxis(3);
     	// sets variable range between 0 to 2
-    	manipulatorWheelOutput += 1;
+    	manipulatorWheelOutput = ((manipulatorWheelOutput + 1) / 2.0) * 4800.0;
     	// gives variable range applicable Vbus output: new range = 0 to 1, acceptable range = -1 to 1
-    	manipulatorWheelOutput /= 2;
     	// outputs value to shooter wheel
     	Robot.shooterBase.setWheelSpeed(manipulatorWheelOutput);
-    	
-   	
     	
     	// manipulator input for horizontal rotation -1 to 1
     	double manipulatorHorizontalAxisInput = OI.manipulator.getRawAxis(1);    
@@ -41,7 +38,7 @@ public class BasicShooterDrive extends Command {
     	
     	// manipulator input for vertical rotation -1 to 1
     	double manipulatorAxisInput = OI.manipulator.getRawAxis(2); 
-    	//outputs value to vertical motor
+    	// outputs value to vertical motor
     	Robot.shooterBase.setVerticalVbus(manipulatorAxisInput);
     }
 

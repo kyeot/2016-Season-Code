@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class ShooterBase extends Subsystem {
 	CANTalon shooterWheel;
@@ -23,12 +22,11 @@ public class ShooterBase extends Subsystem {
 		shooterWheel = new CANTalon(RobotMap.SHOOTER_WHEEL_MOTOR_ID);
 		shooterWheel.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		shooterWheel.changeControlMode(TalonControlMode.Speed);
-		shooterWheel.configEncoderCodesPerRev(40);
+		shooterWheel.configEncoderCodesPerRev(20);
 		shooterWheel.reverseSensor(true);
-		shooterWheel.setP(16.0); //change these values
-		shooterWheel.setI(0.35); //change these values
-		shooterWheel.setD(0.0); // change these values
-		shooterWheel.setF(0);	
+		shooterWheel.setPID(1.5, 0.0017, 0, 0, 500, 4, 0);
+		shooterWheel.configPeakOutputVoltage(12, -12);
+		shooterWheel.clearIAccum();
 		
 		verticalAxisMotor = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
 		
@@ -41,12 +39,10 @@ public class ShooterBase extends Subsystem {
 	
 	public void setWheelSpeed(double rpmOutput) {
 		shooterWheel.set(rpmOutput);
-		System.out.println(shooterWheel.getPosition());
-		System.out.println(shooterWheel.getEncVelocity());
 	}
 	
 	// outputs value to vertical axis motor
-public void setVerticalVbus(double output) {
+	public void setVerticalVbus(double output) {
 		verticalAxisMotor.set(output);
 	}
 	
