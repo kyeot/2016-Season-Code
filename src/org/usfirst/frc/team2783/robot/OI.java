@@ -19,9 +19,9 @@ public class OI {
 	
 	public static Joystick liftJoy = new Joystick(1);
 	
-	public Button button1 = new JoystickButton(liftJoy, 1);
-	public Button button2 = new JoystickButton(liftJoy, 2);
-	public Button button7 = new JoystickButton(liftJoy, 7);
+	public Button LiftBallElevatorButton = new JoystickButton(liftJoy, 1);
+	public Button TurnBandsOnArmButton = new JoystickButton(liftJoy, 2);
+	public Button ReverseBandsOnArmButton = new JoystickButton(liftJoy, 7);
 	
 	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
 	
@@ -29,9 +29,9 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public OI() {
-		button1.toggleWhenPressed(new BallElevatorLift());
-		button2.toggleWhenPressed(new TurnBandsOnPickUpArm());
-		button7.toggleWhenPressed(new BallElevatorDrop());
+		LiftBallElevatorButton.toggleWhenPressed(new BallElevatorLift());
+		TurnBandsOnArmButton.toggleWhenPressed(new TurnBandsOnPickUpArm());
+		ReverseBandsOnArmButton.toggleWhenPressed(new BallElevatorDrop());
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());                                                                        
 	}

@@ -19,8 +19,8 @@ public class BallElevatorDrop extends Command {
     }
 
     protected void execute() {
-    	Robot.pickUp.liftUpMotor.set(-1);
-    	if(Robot.oi.liftJoy.getRawButton(1) == temp3){
+    	Robot.pickUp.BallElevatorMotor.set(-1);
+    	if(Robot.oi.liftJoy.getRawButton(7) == temp3){
     		temp3 = !temp3;
     	}
     }
@@ -30,9 +30,9 @@ public class BallElevatorDrop extends Command {
     }
 
     protected void end() {
-    	Robot.pickUp.liftUpMotor.set(0);
+    	Robot.pickUp.BallElevatorMotor.set(0);
     }
-
-    protected void interrupted() {
+    
+     protected void interrupted() {
     }
 }

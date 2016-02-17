@@ -19,7 +19,7 @@ public class TurnBandsOnPickUpArm extends Command {
     }
 
     protected void execute() {
-        Robot.pickUp.suckUpMotor.set(1);
+        Robot.pickUp.TurnBandsOnArmMotor.set(1);
         if(Robot.oi.liftJoy.getRawButton(2) == temp2){
         	temp2 = !temp2;
         }
