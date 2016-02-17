@@ -9,13 +9,13 @@ import org.usfirst.frc.team2783.robot.commands.PickerUpperArm;
 /**
  *
  */
-public class PickUp extends Subsystem {
+public class BallRetriever extends Subsystem {
 	
 	public CANTalon armMotor = new CANTalon(RobotMap.TURN_PICK_UP_ARM_MOTOR_ID);
 	public CANTalon suckUpMotor = new CANTalon(RobotMap.TURN_BANDS_ON_ARM_MOTOR_ID);
 	public CANTalon liftUpMotor = new CANTalon(RobotMap.LIFT_BALL_UP_MOTOR_ID);
 
-    public PickUp() {
+    public BallRetriever() {
     }
     
 	@Override

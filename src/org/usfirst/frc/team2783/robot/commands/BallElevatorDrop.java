@@ -1,17 +1,17 @@
 package org.usfirst.frc.team2783.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team2783.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TurnBandsOnArm extends Command {
+public class BallElevatorDrop extends Command {
 	
-	boolean temp2 = false;
-	
-    public TurnBandsOnArm() {
+	boolean temp3 = false;
+
+    public BallElevatorDrop() {
     	requires(Robot.pickUp);
     }
 
@@ -19,17 +19,18 @@ public class TurnBandsOnArm extends Command {
     }
 
     protected void execute() {
-        Robot.pickUp.suckUpMotor.set(1);
-        if(Robot.oi.liftJoy.getRawButton(2) == temp2){
-        	temp2 = !temp2;
-        }
+    	Robot.pickUp.liftUpMotor.set(-1);
+    	if(Robot.oi.liftJoy.getRawButton(1) == temp3){
+    		temp3 = !temp3;
+    	}
     }
 
     protected boolean isFinished() {
-        return temp2;
+        return temp3;
     }
 
     protected void end() {
+    	Robot.pickUp.liftUpMotor.set(0);
     }
 
     protected void interrupted() {

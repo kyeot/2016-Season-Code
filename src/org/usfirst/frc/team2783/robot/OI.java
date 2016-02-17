@@ -1,8 +1,9 @@
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.LiftBallUp;
+import org.usfirst.frc.team2783.robot.commands.BallElevatorDrop;
+import org.usfirst.frc.team2783.robot.commands.BallElevatorLift;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
-import org.usfirst.frc.team2783.robot.commands.TurnBandsOnArm;
+import org.usfirst.frc.team2783.robot.commands.TurnBandsOnPickUpArm;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,7 +21,7 @@ public class OI {
 	
 	public Button button1 = new JoystickButton(liftJoy, 1);
 	public Button button2 = new JoystickButton(liftJoy, 2);
-	
+	public Button button7 = new JoystickButton(liftJoy, 7);
 	
 	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
 	
@@ -28,8 +29,9 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public OI() {
-		button1.toggleWhenPressed(new LiftBallUp());
-		button2.toggleWhenPressed(new TurnBandsOnArm());
+		button1.toggleWhenPressed(new BallElevatorLift());
+		button2.toggleWhenPressed(new TurnBandsOnPickUpArm());
+		button7.toggleWhenPressed(new BallElevatorDrop());
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());                                                                        
 	}
