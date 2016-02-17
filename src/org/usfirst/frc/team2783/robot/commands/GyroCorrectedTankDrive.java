@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
  */
 public class GyroCorrectedTankDrive extends PIDCommand {
 
-	final public static double kp = 1;
+	final public static double kp = 0.1;
 	final public static double ki = 0.01;
 	final public static double kd = 0.0;
 		
@@ -24,11 +24,7 @@ public class GyroCorrectedTankDrive extends PIDCommand {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ahrs.zeroYaw();
-    	if(OI.xBoxController.getPOV() == 0){
-    		setSetpoint(0.0);
-    	} else if(OI.xBoxController.getPOV() == 180){
-    		setSetpoint(180.0);
-    	}
+    	setSetpoint(0.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -61,11 +57,9 @@ public class GyroCorrectedTankDrive extends PIDCommand {
 		if(OI.xBoxController.getPOV() == 0){
 			leftOutput = (OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2) + output);
 			rightOutput = (OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2) - output);
-			setSetpoint(0.0);
 		} else if(OI.xBoxController.getPOV() == 180){
-			leftOutput = -(OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2) + output);
-			rightOutput = -(OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2) - output);
-			setSetpoint(180.0);
+			leftOutput = -(OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2) - output);
+			rightOutput = -(OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2) + output);
 		}
 		
 		Robot.driveBase.tankDrive(leftOutput, rightOutput);
