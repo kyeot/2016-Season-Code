@@ -18,8 +18,8 @@ public class OI {
 	
 	public static Joystick liftJoy = new Joystick(1);
 	
-	Button button1 = new JoystickButton(liftJoy, 1);
-	Button button2 = new JoystickButton(liftJoy, 2);
+	public Button button1 = new JoystickButton(liftJoy, 1);
+	public Button button2 = new JoystickButton(liftJoy, 2);
 	
 	
 	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
@@ -31,8 +31,7 @@ public class OI {
 		button1.toggleWhenPressed(new LiftBallUp());
 		button2.toggleWhenPressed(new TurnBandsOnArm());
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
-		pivotRightTrigger.whileActive(new PivotTankDrive());
-		                                                                         
+		pivotRightTrigger.whileActive(new PivotTankDrive());                                                                        
 	}
 	
 }
