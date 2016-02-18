@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterBase extends Subsystem {
 	CANTalon shooterWheel;
 	CANTalon verticalAxisMotor;
-	CANTalon horizontalAxisMotor;
-	AnalogInput horizontalAbsEncoder = new AnalogInput(0);
 	AnalogInput verticalAbsEncoder = new AnalogInput(1);
 
 	public ShooterBase() {
@@ -29,8 +27,6 @@ public class ShooterBase extends Subsystem {
 		shooterWheel.clearIAccum();
 		
 		verticalAxisMotor = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
-		
-		horizontalAxisMotor = new CANTalon(RobotMap.SHOOTER_HORIZONTAL_AXIS_MOTOR);
 	}
 
 	public void initDefaultCommand() {
@@ -44,17 +40,6 @@ public class ShooterBase extends Subsystem {
 	// outputs value to vertical axis motor
 	public void setVerticalVbus(double output) {
 		verticalAxisMotor.set(output);
-	}
-	
-	// outputs value to horizontal axis motor
-	public void setHorizontalVbus(double output) {
-		horizontalAxisMotor.set(output);
-	}
-	
-	// returns encoder value
-	public double getHorizontalValueDegrees() {
-		// turns voltage signal from encoder to degrees
-		return (horizontalAbsEncoder.getVoltage() / 5) * 360;			
 	}
 	
 	//returns encoder value
