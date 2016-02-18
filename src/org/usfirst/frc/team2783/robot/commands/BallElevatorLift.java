@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2783.robot.commands;
 
+import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,15 +13,15 @@ public class BallElevatorLift extends Command {
 	boolean temp = false;
 	
     public BallElevatorLift() {
-    	requires(Robot.pickUp);
+    	requires(Robot.shooterBase);
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.pickUp.BallElevatorMotor.set(1);
-    	if(Robot.oi.manipulator.getRawButton(1) == temp){
+    	Robot.shooterBase.setLiftVbus(1);;
+    	if(OI.manipulator.getRawButton(1) == temp){
     		temp = !temp;
     	}
     }
@@ -30,7 +31,7 @@ public class BallElevatorLift extends Command {
     }
     
     protected void end() {
-    	Robot.pickUp.BallElevatorMotor.set(0);
+    	Robot.shooterBase.setLiftVbus(0);;
     }
 
     protected void interrupted() {

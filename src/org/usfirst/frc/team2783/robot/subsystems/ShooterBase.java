@@ -13,6 +13,7 @@ public class ShooterBase extends Subsystem {
 	CANTalon shooterWheel;
 	CANTalon verticalAxisMotor;
 	AnalogInput verticalAbsEncoder = new AnalogInput(1);
+	CANTalon ballElevatorMotor;
 
 	public ShooterBase() {
 		super();
@@ -27,6 +28,8 @@ public class ShooterBase extends Subsystem {
 		shooterWheel.clearIAccum();
 		
 		verticalAxisMotor = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
+		
+		ballElevatorMotor = new CANTalon(RobotMap.BALL_ELEVATOR_MOTOR_ID);
 	}
 
 	public void initDefaultCommand() {
@@ -46,5 +49,9 @@ public class ShooterBase extends Subsystem {
 	public double getVerticalValueDegrees() {
 		// turns voltage signal from encoder to degrees
 		return (verticalAbsEncoder.getVoltage() / 5) * 360;
+	}
+	
+	public void setLiftVbus(double input) {
+		ballElevatorMotor.set(input);
 	}
 }

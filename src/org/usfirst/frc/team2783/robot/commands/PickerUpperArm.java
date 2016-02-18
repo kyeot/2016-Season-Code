@@ -12,7 +12,7 @@ public class PickerUpperArm extends Command {
 
 	
     public PickerUpperArm() {
-    	requires(Robot.pickUp);
+    	requires(Robot.retriever);
     }
 
     protected void initialize() {
@@ -20,8 +20,7 @@ public class PickerUpperArm extends Command {
 
     protected void execute() {
     	Double throttleValue = OI.manipulator.getRawAxis(3);
-    	Robot.pickUp.setRetrieverArmVbus(throttleValue);
-    	
+    	Robot.retriever.setRetrieverArmVbus(throttleValue);
     }
 
     protected boolean isFinished() {
