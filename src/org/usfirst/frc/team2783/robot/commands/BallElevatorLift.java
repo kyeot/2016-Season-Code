@@ -20,7 +20,7 @@ public class BallElevatorLift extends Command {
 
     protected void execute() {
     	Robot.pickUp.BallElevatorMotor.set(1);
-    	if(Robot.oi.liftJoy.getRawButton(1) == temp){
+    	if(Robot.oi.manipulator.getRawButton(1) == temp){
     		temp = !temp;
     	}
     }

@@ -17,16 +17,15 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
  */
 public class OI {
 	
-	public static Joystick liftJoy = new Joystick(1);
-	
-	public Button LiftBallElevatorButton = new JoystickButton(liftJoy, 1);
-	public Button TurnBandsOnArmButton = new JoystickButton(liftJoy, 2);
-	public Button ReverseBandsOnArmButton = new JoystickButton(liftJoy, 7);
-	
 	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
-	
+	public static Joystick manipulator = new Joystick(1);
+
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
+	
+	public Button LiftBallElevatorButton = new JoystickButton(manipulator, 1);
+	public Button TurnBandsOnArmButton = new JoystickButton(manipulator, 2);
+	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
 	
 	public OI() {
 		LiftBallElevatorButton.toggleWhenPressed(new BallElevatorLift());

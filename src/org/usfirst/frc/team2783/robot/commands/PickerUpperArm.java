@@ -19,8 +19,8 @@ public class PickerUpperArm extends Command {
     }
 
     protected void execute() {
-    	Double throttleValue = OI.liftJoy.getRawAxis(3);
-    	Robot.pickUp.setPercentVBusArm(throttleValue);
+    	Double throttleValue = OI.manipulator.getRawAxis(3);
+    	Robot.pickUp.setRetrieverArmVbus(throttleValue);
     	
     }
 
