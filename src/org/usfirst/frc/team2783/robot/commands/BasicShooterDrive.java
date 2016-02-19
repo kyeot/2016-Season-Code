@@ -34,6 +34,8 @@ public class BasicShooterDrive extends Command {
     	double manipulatorAxisInput = OI.manipulator.getRawAxis(2); 
     	// outputs value to vertical motor
     	Robot.shooterBase.setVerticalVbus(manipulatorAxisInput);
+    	
+    	Robot.shooterBase.setLiftVbus(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

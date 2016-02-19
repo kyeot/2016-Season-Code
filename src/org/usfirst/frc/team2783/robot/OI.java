@@ -22,15 +22,15 @@ public class OI {
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
-	public Button LiftBallElevatorButton = new JoystickButton(manipulator, 1);
-	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
+	public Button liftElevatorButton = new JoystickButton(manipulator, 1);
+	public Button dropElevatorButton = new JoystickButton(manipulator, 7);
 	
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		
-		LiftBallElevatorButton.toggleWhenPressed(new BallElevatorLift());
-		ReverseBandsOnArmButton.toggleWhenPressed(new BallElevatorDrop());
+		liftElevatorButton.whileHeld(new BallElevatorLift());
+		dropElevatorButton.whileHeld(new BallElevatorDrop());
 	}
 	
 }
