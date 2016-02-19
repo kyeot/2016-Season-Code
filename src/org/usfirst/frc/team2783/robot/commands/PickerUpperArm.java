@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class PickerUpperArm extends Command {
-
 	
     public PickerUpperArm() {
     	requires(Robot.retriever);
+    	requires(Robot.shooterBase);
     }
 
     protected void initialize() {
@@ -20,7 +20,8 @@ public class PickerUpperArm extends Command {
 
     protected void execute() {
     	Double throttleValue = OI.manipulator.getRawAxis(3);
-    	Robot.retriever.setRetrieverArmVbus(throttleValue);
+    	Robot.retriever.setRetrieverArmVbus(throttleValue);    	
+    	
     }
 
     protected boolean isFinished() {

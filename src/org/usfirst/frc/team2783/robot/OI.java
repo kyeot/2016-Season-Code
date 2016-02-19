@@ -2,6 +2,7 @@ package org.usfirst.frc.team2783.robot;
 
 import org.usfirst.frc.team2783.robot.commands.BallElevatorDrop;
 import org.usfirst.frc.team2783.robot.commands.BallElevatorLift;
+import org.usfirst.frc.team2783.robot.commands.PickerUpperArm;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.commands.TurnBandsOnPickUpArm;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
@@ -24,7 +25,8 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public Button LiftBallElevatorButton = new JoystickButton(manipulator, 1);
-	public Button TurnBandsOnArmButton = new JoystickButton(manipulator, 2);
+	public Button TurnPickupArmButton = new JoystickButton(manipulator, 2);
+	public Button TurnBandsOnArmButton = new JoystickButton(manipulator, 47);
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
 	
 	public OI() {
@@ -34,6 +36,7 @@ public class OI {
 		LiftBallElevatorButton.toggleWhenPressed(new BallElevatorLift());
 		TurnBandsOnArmButton.toggleWhenPressed(new TurnBandsOnPickUpArm());
 		ReverseBandsOnArmButton.toggleWhenPressed(new BallElevatorDrop());
+		TurnPickupArmButton.toggleWhenActive(new PickerUpperArm());
 	}
 	
 }
