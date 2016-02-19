@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2783.robot.commands;
 
-import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,19 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PickerUpperArm extends Command {
-	
-    public PickerUpperArm() {
+public class ZeroBallRetriever extends Command {
+
+    public ZeroBallRetriever() {
     	requires(Robot.retriever);
-    	requires(Robot.shooterBase);
     }
 
     protected void initialize() {
+    	
     }
 
     protected void execute() {
-    	Double throttleValue = OI.manipulator.getRawAxis(3);
-    	Robot.retriever.setRetrieverArmVbus(throttleValue);    	
+    	Robot.retriever.setRetrieverVbus(0);
+    	Robot.retriever.setRetrieverArmVbus(0);
     	
     }
 

@@ -4,8 +4,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team2783.robot.RobotMap;
-import org.usfirst.frc.team2783.robot.commands.PickerUpperArm;
-import org.usfirst.frc.team2783.robot.commands.ZeroifyRetriever;
+import org.usfirst.frc.team2783.robot.commands.ZeroBallRetriever;
 
 /**
  *
@@ -22,7 +21,7 @@ public class BallRetriever extends Subsystem {
     
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new ZeroifyRetriever());
+		setDefaultCommand(new ZeroBallRetriever());
 	}
     
     public void setRetrieverVbus(double input){

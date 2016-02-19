@@ -1,24 +1,27 @@
 package org.usfirst.frc.team2783.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
+import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TurnBandsOnPickUpArm extends Command {
+public class RetrieverArmDrive extends Command {
 	
-    public TurnBandsOnPickUpArm() {
+    public RetrieverArmDrive() {
     	requires(Robot.retriever);
+    	requires(Robot.shooterBase);
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-        Robot.retriever.setRetrieverVbus(1);
-	}
+    	Double throttleValue = -OI.manipulator.getRawAxis(1);
+    	Robot.retriever.setRetrieverArmVbus(throttleValue);    	
+    }
 
     protected boolean isFinished() {
         return false;
