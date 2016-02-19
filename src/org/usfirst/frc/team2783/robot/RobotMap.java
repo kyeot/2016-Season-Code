@@ -15,7 +15,7 @@ public class RobotMap {
 	final public static int FRONT_RIGHT_MOTOR_ID = 15;
 	final public static int REAR_RIGHT_MOTOR_ID = 14;
 	
-	final public static int SHOOTER_VERTICAL_AXIS_MOTOR = 11; //default setting. Motor ID unknown. CHANGE ME
-	final public static int SHOOTER_WHEEL_MOTOR_ID = 13; //default setting. Motor ID unknown. CHANGE ME
-	final public static int BALL_ELEVATOR_MOTOR_ID = 12;
+	final public static int SHOOTER_WHEEL_MOTOR_ID = 13; 
+	final public static int SHOOTER_VERTICAL_AXIS_MOTOR_PWM_PORT = 3;
+	final public static int BALL_ELEVATOR_PWM_PORT = 4;
 }

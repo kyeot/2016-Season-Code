@@ -7,13 +7,16 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ShooterBase extends Subsystem {
 	CANTalon shooterWheel;
-	CANTalon verticalAxisMotor;
+	
+	VictorSP verticalAxisMotor;
 	AnalogInput verticalAbsEncoder = new AnalogInput(1);
-	CANTalon ballElevatorMotor;
+	
+	VictorSP ballElevatorMotor;
 
 	public ShooterBase() {
 		super();
@@ -27,9 +30,9 @@ public class ShooterBase extends Subsystem {
 		shooterWheel.configPeakOutputVoltage(12, -12);
 		shooterWheel.clearIAccum();
 		
-		verticalAxisMotor = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
+		verticalAxisMotor = new VictorSP(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR_PWM_PORT);
 		
-		ballElevatorMotor = new CANTalon(RobotMap.BALL_ELEVATOR_MOTOR_ID);
+		ballElevatorMotor = new VictorSP(RobotMap.BALL_ELEVATOR_PWM_PORT);
 	}
 
 	public void initDefaultCommand() {
