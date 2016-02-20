@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2783.robot;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
-import org.usfirst.frc.team2783.robot.commands.AlignShooterToGoal;
+import org.usfirst.frc.team2783.robot.commands.AutoAimRobot;
 import org.usfirst.frc.team2783.robot.commands.BallElevatorDrop;
 import org.usfirst.frc.team2783.robot.commands.BallElevatorLift;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
@@ -36,7 +36,7 @@ public class OI {
 		liftElevatorButton.whileHeld(new BallElevatorLift());
 		dropElevatorButton.whileHeld(new BallElevatorDrop());
 		
-		autoAlignButton.toggleWhenPressed(new AlignShooterToGoal());
+		autoAlignButton.whenPressed(new AutoAimRobot());
 	}
 	
 }
