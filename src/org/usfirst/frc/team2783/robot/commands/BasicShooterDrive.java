@@ -31,7 +31,7 @@ public class BasicShooterDrive extends Command {
     	Robot.shooterBase.setWheelSpeed(manipulatorWheelOutput);
     	
     	// manipulator input for vertical rotation -1 to 1
-    	double manipulatorAxisInput = OI.manipulator.getRawAxis(2); 
+    	double manipulatorAxisInput = OI.manipulator.getY(); 
     	// outputs value to vertical motor
     	Robot.shooterBase.setVerticalVbus(manipulatorAxisInput);
     	
