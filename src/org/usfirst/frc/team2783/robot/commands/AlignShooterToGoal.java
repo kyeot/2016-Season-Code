@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2783.robot.commands;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -32,7 +34,7 @@ public class AlignShooterToGoal extends PIDCommand {
     	setSetpoint(xImageRes/2);
     	
     	gripTapeTracking = NetworkTable.getTable("GRIP/tapeTrackingCountours");
-    	gripImageSize = NetworkTable.getTable("GRIP/tapeTrackingImageSize");
+    	//gripImageSize = NetworkTable.getTable("GRIP/tapeTrackingImageSize");
     }
 
     // Called just before this Command runs the first time
@@ -41,6 +43,9 @@ public class AlignShooterToGoal extends PIDCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double w = gripTapeTracking.getNumberArray("width")[0];
+    	double distance = 12800 / (2 * w * Math.tan((33.5 * Math.PI) / 180)); 
+    	System.out.println(distance);
     }
 
     // Make this return true when this Command no longer needs to run execute()
