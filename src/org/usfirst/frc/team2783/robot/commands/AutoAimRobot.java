@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2783.robot.commands;
 
 import org.usfirst.frc.team2783.robot.Robot;
+import org.usfirst.frc.team2783.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -59,27 +60,24 @@ public class AutoAimRobot extends PIDCommand {
 		}
 		
 		//If there is a largest particle
-		if (largestParticleIndex != null) {
+		try {
 			//Get associated information
 			largestParticleWidth = gripTapeTracking.getNumberArray("width", new double[0])[largestParticleIndex];
 			largestParticleCenterY = gripTapeTracking.getNumberArray("centerY", new double[0])[largestParticleIndex];
 			
 			//Calculate distance to goal
-			distanceToGoal = 12800 / (2 * largestParticleWidth * Math.tan((33.5 * Math.PI) / 180));
+			distanceToGoal = (20 * xImageRes) / 
+					(2 * largestParticleWidth * Math.tan(((RobotMap.PROCESSING_CAMERA_FOV / 2) * Math.PI) / 180));
+			//Adjust calculated distance based upon standard error
+			distanceToGoal = distanceToGoal * 1.12;
 			
 			//Make sure the PIDcontroller is enables
 			if (!getPIDController().isEnabled()) {
 				getPIDController().enable();
 			}
-			
-			System.out.println("largestParticleIndex: " + largestParticleIndex);
-			System.out.println("largestParticleArea: " + largestParticleArea);
-			System.out.println("largestParticleWidth: " + largestParticleWidth);
-			System.out.println("largestParticleCenterY: " + largestParticleCenterY);
-			System.out.println("distanceToGoal: " + distanceToGoal);
 		
-		//If there isn't, clear out all of the associtated variables and stop the PID
-		} else {
+		//If there isn't, clear out all of the associated variables and stop the PID
+		} catch (NullPointerException | ArrayIndexOutOfBoundsException exception) {
 			largestParticleIndex = null;
 			largestParticleArea = null;
 			largestParticleWidth = null;
@@ -91,8 +89,6 @@ public class AutoAimRobot extends PIDCommand {
 			if (getPIDController().isEnabled()) {
 				getPIDController().reset();
 			}
-			
-			System.out.println("No particles detected");
 		}
 		
 		//Update the PID's setpoint to direct the robot to 
