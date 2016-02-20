@@ -19,7 +19,7 @@ public class SteerableTankDrive extends Command {
 		    protected void execute() {
 		    	//Declares throttle value based on xbox controllers, and skewValue on left joystick
 		    	Double throttleValue = OI.xBoxController.getRawAxis(3) - OI.xBoxController.getRawAxis(2);
-		    	Double skewValue = 0.5 * OI.xBoxController.getRawAxis(0);
+		    	Double skewValue = OI.xBoxController.getRawAxis(0);
 		    	
 		    	//Sets left and right values using throttle and skew
 		    	Double leftOutput = throttleValue + (throttleValue * skewValue);
