@@ -17,7 +17,7 @@ public class EnableRetrieverBands extends Command {
     }
 
     protected void execute() {
-        Robot.retriever.setRetrieverVbus(1);
+        Robot.retriever.setRetrieverVbus(0.5);
 	}
 
     protected boolean isFinished() {

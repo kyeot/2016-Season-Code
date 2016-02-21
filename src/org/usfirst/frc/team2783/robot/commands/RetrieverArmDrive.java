@@ -19,6 +19,7 @@ public class RetrieverArmDrive extends Command {
     }
 
     protected void execute() {
+    	Robot.shooterBase.setVerticalVbus(0);
     	Double throttleValue = -OI.manipulator.getRawAxis(1);
     	Robot.retriever.setRetrieverArmVbus(throttleValue);    	
     }
