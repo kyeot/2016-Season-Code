@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RetrieverArmDrive extends Command {
 	
+	private double currentSpeed;
+	
     public RetrieverArmDrive() {
     	requires(Robot.retriever);
     	requires(Robot.shooterBase);
@@ -19,9 +21,16 @@ public class RetrieverArmDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.shooterBase.setVerticalVbus(0);
-    	Double throttleValue = -OI.manipulator.getRawAxis(1);
-    	Robot.retriever.setRetrieverArmVbus(throttleValue);    	
+    	if (Math.abs(OI.manipulator.getY()) < 0.1) {
+    		currentSpeed = 0;
+    	} else {
+    		currentSpeed = -OI.manipulator.getY();
+    	}
+    	
+    	System.out.println(currentSpeed);
+    	
+    	Robot.shooterBase.setLiftVbus(0);
+		Robot.retriever.setRetrieverVbus(currentSpeed);
     }
 
     protected boolean isFinished() {

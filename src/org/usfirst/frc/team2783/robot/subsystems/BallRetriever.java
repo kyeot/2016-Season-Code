@@ -4,31 +4,36 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team2783.robot.RobotMap;
-import org.usfirst.frc.team2783.robot.commands.ZeroBallRetriever;
+import org.usfirst.frc.team2783.robot.commands.RetrieverArmDrive;
+import org.usfirst.frc.team2783.robot.commands.ContinueRetrieverSpeed;
 
 /**
  *
  */
 public class BallRetriever extends Subsystem {
 	
-	private VictorSP retrieverArm;
-	private VictorSP retriever;
+	private VictorSP leftRetriever;
+	private VictorSP rightRetriever;
 
     public BallRetriever() {
-    	retrieverArm = new VictorSP(RobotMap.BALL_RETRIEVER_ARM_MOTOR_PWM_PORT);
-    	retriever = new VictorSP(RobotMap.BALL_RETRIEVER_MOTOR_PWM_PORT);
+    	leftRetriever = new VictorSP(RobotMap.BALL_RETRIEVER_LEFT_MOTOR_PWM_PORT);
+    	
+    	rightRetriever = new VictorSP(RobotMap.BALL_RETRIEVER_RIGHT_MOTOR_PWM_PORT);
+    	rightRetriever.setInverted(true);
     }
     
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new ZeroBallRetriever());
+		setDefaultCommand(new ContinueRetrieverSpeed());
 	}
     
     public void setRetrieverVbus(double input){
-    	retriever.set(input);
+    	leftRetriever.set(input);
+    	rightRetriever.set(input);
     }
     
-    public void setRetrieverArmVbus(double input){
-    	retrieverArm.set(input);
+    public void controllerSafety() {
+    	leftRetriever.Feed();
+    	rightRetriever.Feed();
     }
 }

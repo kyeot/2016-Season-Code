@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ZeroBallRetriever extends Command {
+public class ContinueRetrieverSpeed extends Command {
 
-    public ZeroBallRetriever() {
+    public ContinueRetrieverSpeed() {
     	requires(Robot.retriever);
     }
 
@@ -18,9 +18,7 @@ public class ZeroBallRetriever extends Command {
     }
 
     protected void execute() {
-    	Robot.retriever.setRetrieverVbus(0);
-    	Robot.retriever.setRetrieverArmVbus(0);
-    	
+    	Robot.retriever.controllerSafety();
     }
 
     protected boolean isFinished() {

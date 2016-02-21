@@ -4,7 +4,6 @@ import org.usfirst.frc.team2783.robot.commands.BallElevatorDrop;
 import org.usfirst.frc.team2783.robot.commands.BallElevatorLift;
 import org.usfirst.frc.team2783.robot.commands.RetrieverArmDrive;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
-import org.usfirst.frc.team2783.robot.commands.EnableRetrieverBands;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -34,7 +33,6 @@ public class OI {
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		
 		driveRetrieverArmButton.whileHeld(new RetrieverArmDrive());
-		enableRetrieverBandsButton.toggleWhenPressed(new EnableRetrieverBands());
 		
 		LiftBallElevatorButton.toggleWhenPressed(new BallElevatorLift());
 		ReverseBandsOnArmButton.toggleWhenPressed(new BallElevatorDrop());
