@@ -3,6 +3,7 @@ package org.usfirst.frc.team2783.robot.commands;
 import org.usfirst.frc.team2783.robot.Robot;
 import org.usfirst.frc.team2783.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -11,8 +12,8 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class AutoAimRobot extends PIDCommand {
 	
-	private final static double kp = 0.05;
-	private final static double kd = 0.0005;
+	private final static double kp = 0.1;
+	private final static double kd = 0.001;
 	private final static double ki = 0.0;
 	
 	private NetworkTable gripTapeTracking;
@@ -35,14 +36,17 @@ public class AutoAimRobot extends PIDCommand {
     	
     	//TODO: Update xImageRes from network tables?
     	//Set the range of the PID's input variable
-    	setInputRange(0, xImageRes);
+    	setInputRange(0, 1);
+    	setSetpoint(0.5);
     	    	
     	gripTapeTracking = NetworkTable.getTable("GRIP/tapeTrackingCountours");
     	//gripImageSize = NetworkTable.getTable("GRIP/tapeTrackingImageSize");
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
+    	getPIDController().reset();
+    	getPIDController().enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -63,7 +67,7 @@ public class AutoAimRobot extends PIDCommand {
 		try {
 			//Get associated information
 			largestParticleWidth = gripTapeTracking.getNumberArray("width", new double[0])[largestParticleIndex];
-			largestParticleCenterY = gripTapeTracking.getNumberArray("centerY", new double[0])[largestParticleIndex];
+			largestParticleCenterY = gripTapeTracking.getNumberArray("centerX", new double[0])[largestParticleIndex];
 			
 			//Calculate distance to goal
 			distanceToGoal = (20 * xImageRes) / 
@@ -90,16 +94,14 @@ public class AutoAimRobot extends PIDCommand {
 				getPIDController().reset();
 			}
 		}
-		
-		//Update the PID's setpoint to direct the robot to 
-		//match with the center of the processed image
-    	setSetpoint(xImageRes/2);
+    	
+    	System.out.println("Enabled: " + getPIDController().isEnabled() + ", Error: " + getPIDController().getAvgError());
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Math.abs(getPIDController().getError()) < 0.1;
     }
 
     // Called once after isFinished returns true
@@ -126,6 +128,7 @@ public class AutoAimRobot extends PIDCommand {
 	//TODO: Set the robot's rotational position based on output
 	@Override
 	protected void usePIDOutput(double output) {
+		System.out.println(output);
 		Robot.driveBase.tankDrive(output, -output);
 	}
 }

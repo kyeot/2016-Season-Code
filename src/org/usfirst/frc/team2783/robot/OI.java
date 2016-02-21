@@ -2,6 +2,7 @@ package org.usfirst.frc.team2783.robot;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.usfirst.frc.team2783.robot.commands.AutoAimRobot;
+import org.usfirst.frc.team2783.robot.commands.AutoAimThenShoot;
 import org.usfirst.frc.team2783.robot.commands.BallElevatorDrop;
 import org.usfirst.frc.team2783.robot.commands.BallElevatorLift;
 import org.usfirst.frc.team2783.robot.commands.FireShooter;
@@ -29,7 +30,8 @@ public class OI {
 	public Button dropElevatorButton = new JoystickButton(manipulator, 7);
 	public Button liftElevatorButton = new JoystickButton(manipulator, 8);
 	
-	public Button autoAlignButton = new JoystickButton(manipulator, 3);
+	public Button alignThenShootButton = new JoystickButton(manipulator, 3);
+	public Button autoAlignButton = new JoystickButton(manipulator, 4);
 	
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
@@ -39,6 +41,7 @@ public class OI {
 		dropElevatorButton.whileHeld(new BallElevatorDrop());		
 		liftElevatorButton.whileHeld(new BallElevatorLift());
 		
+		alignThenShootButton.whenPressed(new AutoAimThenShoot());
 		autoAlignButton.whenPressed(new AutoAimRobot());
 	}
 	
