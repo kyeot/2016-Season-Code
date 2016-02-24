@@ -17,5 +17,5 @@ public class RobotMap {
 	
 	final public static int SHOOTER_WHEEL_MOTOR_ID = 13; 
 	final public static int SHOOTER_VERTICAL_AXIS_MOTOR_PWM_PORT = 4;
-	final public static int BALL_ELEVATOR_PWM_PORT = 6;
+	final public static int BALL_ELEVATOR_PWM_PORT = 2;
 }
