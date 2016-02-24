@@ -39,8 +39,14 @@ public class ShooterBase extends Subsystem {
 		setDefaultCommand(new BasicShooterDrive());		
 	}
 	
-	public void setWheelSpeed(double rpmOutput) {
+	public void setWheelSpeedRpm(double rpmOutput) {
+		shooterWheel.changeControlMode(TalonControlMode.Speed);
 		shooterWheel.set(rpmOutput);
+	}
+	
+	public void setWheelSpeedVbus(double vbusOutput) {
+		shooterWheel.changeControlMode(TalonControlMode.PercentVbus);
+		shooterWheel.set(vbusOutput);
 	}
 	
 	// outputs value to vertical axis motor

@@ -23,12 +23,15 @@ public class BasicShooterDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// manipulatorInput for wheel -1 to 1
-    	double manipulatorWheelOutput = OI.manipulator.getRawAxis(3);
+    	double manipulatorWheelOutput = -OI.manipulator.getRawAxis(3);
+    	/*
     	// sets variable range between 0 to 2
     	manipulatorWheelOutput = ((manipulatorWheelOutput + 1) / 2.0) * 4800.0;
     	// gives variable range applicable Vbus output: new range = 0 to 1, acceptable range = -1 to 1
     	// outputs value to shooter wheel
-    	Robot.shooterBase.setWheelSpeed(manipulatorWheelOutput);
+    	Robot.shooterBase.setWheelSpeedRpm(manipulatorWheelOutput);
+    	*/
+    	Robot.shooterBase.setWheelSpeedVbus((manipulatorWheelOutput + 1) / 2.0);
     	
     	// manipulator input for vertical rotation -1 to 1
     	double manipulatorAxisInput = OI.manipulator.getY(); 
