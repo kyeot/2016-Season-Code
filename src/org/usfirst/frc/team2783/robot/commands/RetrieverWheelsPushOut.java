@@ -8,33 +8,26 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RetrieverArmDrive extends Command {
+public class RetrieverWheelsPushOut extends Command {
 	
-	private double currentSpeed;
-	
-    public RetrieverArmDrive() {
+	boolean temp = false;
+
+    public RetrieverWheelsPushOut() {
     	requires(Robot.retriever);
-    	requires(Robot.shooterBase);
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	if (Math.abs(OI.manipulator.getY()) < 0.1) {
-    		currentSpeed = 0;
-    	} else {
-    		currentSpeed = -OI.manipulator.getY();
+    	Robot.shooterBase.setLiftVbus(-1);;
+    	if(OI.manipulator.getRawButton(5) == temp){
+    		temp = !temp;
     	}
-    	
-    	System.out.println(currentSpeed);
-    	
-    	Robot.shooterBase.setLiftVbus(0);
-		Robot.retriever.setRetrieverVbus(currentSpeed);
     }
 
     protected boolean isFinished() {
-        return false;
+    	return temp;
     }
 
     protected void end() {
