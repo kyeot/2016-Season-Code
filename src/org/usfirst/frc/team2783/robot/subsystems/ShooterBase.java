@@ -25,6 +25,7 @@ public class ShooterBase extends Subsystem {
 		shooterWheel.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		shooterWheel.changeControlMode(TalonControlMode.Speed);
 		shooterWheel.configEncoderCodesPerRev(20);
+		shooterWheel.setInverted(true);
 		shooterWheel.reverseSensor(true);
 		shooterWheel.setPID(1.5, 0.0017, 0, 0, 500, 4, 0);
 		shooterWheel.configPeakOutputVoltage(12, -12);

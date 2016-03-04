@@ -35,10 +35,10 @@ public class BasicShooterDrive extends Command {
     	manipulatorWheelOutput = ((manipulatorWheelOutput + 1) / 2.0);
     	
     	if ((Math.abs(manipulatorWheelOutput - 0.5) > 0.1) && OI.manipulator.getRawButton(2)) {
-    		wheelSpeed = -manipulatorWheelOutput;
+    		wheelSpeed = manipulatorWheelOutput;
     		Robot.shooterBase.setWheelSpeedVbus(wheelSpeed);
     	} else if (Math.abs(manipulatorWheelOutput - 0.5) > 0.1) {
-    		Robot.shooterBase.setWheelSpeedVbus(-manipulatorWheelOutput);
+    		Robot.shooterBase.setWheelSpeedVbus(manipulatorWheelOutput);
     	} else {
     		Robot.shooterBase.setWheelSpeedVbus(wheelSpeed);
     	}
