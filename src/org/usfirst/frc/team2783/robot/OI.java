@@ -2,8 +2,11 @@ package org.usfirst.frc.team2783.robot;
 
 import org.usfirst.frc.team2783.robot.commands.BallElevatorDrop;
 import org.usfirst.frc.team2783.robot.commands.BallElevatorLift;
-import org.usfirst.frc.team2783.robot.commands.RetrieverArmDrive;
+import org.usfirst.frc.team2783.robot.commands.LiftArm;
+import org.usfirst.frc.team2783.robot.commands.LowerArm;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
+import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
+import org.usfirst.frc.team2783.robot.commands.RetrieverOut;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,15 +27,21 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
 	public Button LiftBallElevatorButton = new JoystickButton(manipulator, 1);
-	public Button driveRetrieverArmButton = new JoystickButton(manipulator, 2);
-	public Button enableRetrieverBandsButton = new JoystickButton(manipulator, 11);
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
+	public Button retrieverInButton = new JoystickButton(manipulator, 5);
+	public Button retrieverOutButton = new JoystickButton(manipulator, 6);
+	public Button liftArm = new JoystickButton(manipulator, 4);
+	public Button lowerArm = new JoystickButton(manipulator, 3);
 	
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		
-		driveRetrieverArmButton.whileHeld(new RetrieverArmDrive());
+		retrieverInButton.toggleWhenPressed(new RetrieverIn());
+		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
+		
+		liftArm.whileActive(new LiftArm());
+		lowerArm.whileActive(new LowerArm());
 		
 		LiftBallElevatorButton.toggleWhenPressed(new BallElevatorLift());
 		ReverseBandsOnArmButton.toggleWhenPressed(new BallElevatorDrop());

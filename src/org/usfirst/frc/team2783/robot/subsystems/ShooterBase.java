@@ -26,6 +26,7 @@ public class ShooterBase extends Subsystem {
 		shooterWheel.setPID(1.5, 0.0017, 0, 0, 500, 4, 0);
 		shooterWheel.configPeakOutputVoltage(12, -12);
 		shooterWheel.clearIAccum();
+		shooterWheel.setInverted(true);
 		
 		verticalAxisMotor = new CANTalon(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR);
 		

@@ -21,4 +21,6 @@ public class RobotMap {
 	
 	final public static int BALL_RETRIEVER_LEFT_MOTOR_PWM_PORT = 1;
 	final public static int BALL_RETRIEVER_RIGHT_MOTOR_PWM_PORT = 3;
+	
+	final public static int RETRIEVER_ARM_MOTOR_PWM_PORT = 0;
 }
