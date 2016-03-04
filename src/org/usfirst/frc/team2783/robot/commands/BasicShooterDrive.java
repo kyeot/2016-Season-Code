@@ -35,22 +35,21 @@ public class BasicShooterDrive extends Command {
     	// Map the input value (1 -> -1) to a more... Useful range (0 -> 1)
     	Double scaledManipulatorWheelOutput = ((manipulatorWheelControlAxis + 1) / 2.0);
     	
-    	// If the joystick is centered, and button 2 is being pushed, 
+    	// If button 2 is being pushed, 
     	// save the current speed (wheelSpeed) and update the motor accordingly
-    	if (isCentered && OI.manipulator.getRawButton(2)) {
+    	if (OI.manipulator.getRawButton(2)) {
     		wheelSpeed = scaledManipulatorWheelOutput;
     		Robot.shooterBase.setWheelSpeedVbus(wheelSpeed);
     		
 		// If the joystick is centered, and button 2 is not being pressed, 
-		// update the wheel speed based upon the joystick input without saving
-		// the value anywhere
+		// update the wheel speed with the most recent save value (wheelSpeed)
     	} else if (isCentered) {
-    		Robot.shooterBase.setWheelSpeedVbus(scaledManipulatorWheelOutput);
+    		Robot.shooterBase.setWheelSpeedVbus(wheelSpeed);
     		
 		// If the joystick is neither centered nor button two is pressed, 
-    	// update the motor with the most recent saved speed (wheelSpeed)
+    	// update the motor with the joystick's value
     	} else {
-    		Robot.shooterBase.setWheelSpeedVbus(wheelSpeed);
+    		Robot.shooterBase.setWheelSpeedVbus(scaledManipulatorWheelOutput);
     	}
     	
     	
