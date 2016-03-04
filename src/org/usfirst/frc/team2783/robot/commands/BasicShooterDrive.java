@@ -1,9 +1,5 @@
 package org.usfirst.frc.team2783.robot.commands;
 
-import java.util.function.DoubleToLongFunction;
-
-import javax.xml.parsers.DocumentBuilder;
-
 import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.Robot;
 
@@ -14,14 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class BasicShooterDrive extends Command {
 	
-	private Double wheelSpeed;
+	private Double wheelSpeed = 0.0;
 
     public BasicShooterDrive() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.shooterBase);
-    	
-    	wheelSpeed = 0.0;
     }
 
     // Called just before this Command runs the first time
@@ -30,26 +22,46 @@ public class BasicShooterDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// Shooter wheel speed control
-    	Double manipulatorWheelOutput = -OI.manipulator.getRawAxis(1);
-    	manipulatorWheelOutput = ((manipulatorWheelOutput + 1) / 2.0);
+    	/*
+    	 *  Control shooter wheel from operator
+    	 *  Moving the joystick up and down changes the speed of the shooter. 
+    	 *  Clicking button 2 saves the current speed, so that when the joystick
+    	 *  is zeroed (let go of by a driver), the saved speed is recalled until 
+    	 *  the joystick is again moved or the saved speed is updated.
+    	 */
+    	Double manipulatorWheelControlAxis = -OI.manipulator.getRawAxis(1);
+    	// If the joystick is within 10% of the vertical center of the axis, it's centered
+    	Boolean isCentered = Math.abs(manipulatorWheelControlAxis) > 0.1;
+    	// Map the input value (1 -> -1) to a more... Useful range (0 -> 1)
+    	Double scaledManipulatorWheelOutput = ((manipulatorWheelControlAxis + 1) / 2.0);
     	
-    	if ((Math.abs(manipulatorWheelOutput - 0.5) > 0.1) && OI.manipulator.getRawButton(2)) {
-    		wheelSpeed = manipulatorWheelOutput;
+    	// If the joystick is centered, and button 2 is being pushed, 
+    	// save the current speed (wheelSpeed) and update the motor accordingly
+    	if (isCentered && OI.manipulator.getRawButton(2)) {
+    		wheelSpeed = scaledManipulatorWheelOutput;
     		Robot.shooterBase.setWheelSpeedVbus(wheelSpeed);
-    	} else if (Math.abs(manipulatorWheelOutput - 0.5) > 0.1) {
-    		Robot.shooterBase.setWheelSpeedVbus(manipulatorWheelOutput);
+    		
+		// If the joystick is centered, and button 2 is not being pressed, 
+		// update the wheel speed based upon the joystick input without saving
+		// the value anywhere
+    	} else if (isCentered) {
+    		Robot.shooterBase.setWheelSpeedVbus(scaledManipulatorWheelOutput);
+    		
+		// If the joystick is neither centered nor button two is pressed, 
+    	// update the motor with the most recent saved speed (wheelSpeed)
     	} else {
     		Robot.shooterBase.setWheelSpeedVbus(wheelSpeed);
     	}
     	
-    	// manipulator input for vertical rotation -1 to 1
-    	double manipulatorAxisInput = -OI.manipulator.getRawAxis(5) * 0.75; 
-    	// outputs value to vertical motor
-    	Robot.shooterBase.setVerticalVbus(manipulatorAxisInput);
     	
+		// Set the vertical angle adjuster based on axis 5 and a scaler
+    	double verticalAxisAdjusterVbus = -OI.manipulator.getRawAxis(5) * 0.75; 
+    	Robot.shooterBase.setVerticalAxisVbus(verticalAxisAdjusterVbus);
+    	
+    	
+    	// Set the elevator speed based upon two axes
     	Double lifterSpeed = OI.manipulator.getRawAxis(3) - OI.manipulator.getRawAxis(2);
-    	Robot.shooterBase.setLiftVbus(lifterSpeed);
+    	Robot.shooterBase.setBallElevatorVbus(lifterSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
