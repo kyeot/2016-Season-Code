@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.BallElevatorDrop;
-import org.usfirst.frc.team2783.robot.commands.BallElevatorLift;
 import org.usfirst.frc.team2783.robot.commands.FireShooter;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
@@ -22,18 +20,10 @@ public class OI {
 
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
-	
-	public Button fireShooterButton = new JoystickButton(manipulator, 1);
-	public Button dropElevatorButton = new JoystickButton(manipulator, 7);
-	public Button liftElevatorButton = new JoystickButton(manipulator, 8);
-	
+		
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
-		
-		fireShooterButton.whenPressed(new FireShooter());
-		dropElevatorButton.whileHeld(new BallElevatorDrop());
-		liftElevatorButton.whileHeld(new BallElevatorLift());
 	}
 	
 }
