@@ -15,6 +15,7 @@ public class BallRetriever extends Subsystem {
 	private VictorSP rightRetriever;
 	private VictorSP armControl;
 	
+	private double lastRetrieverSpeed = 0.0;
 	
     public BallRetriever() {
     	leftRetriever = new VictorSP(RobotMap.BALL_RETRIEVER_LEFT_MOTOR_PWM_PORT);
@@ -32,12 +33,17 @@ public class BallRetriever extends Subsystem {
 	}
     
     public void setRetrieverVbus(double input){
+    	lastRetrieverSpeed = input;
     	leftRetriever.set(input);
     	rightRetriever.set(input);
     }
     
     public void setRetrieverArmVbus(double input){
     	armControl.set(input);
+    }
+    
+    public void continueRetrieverSpeed() {
+    	setRetrieverVbus(lastRetrieverSpeed);
     }
     
     public void controllerSafety() {

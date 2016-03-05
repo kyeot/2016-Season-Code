@@ -20,6 +20,7 @@ public class LiftArm extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.retriever.setRetrieverArmVbus(.5);
+    	Robot.retriever.continueRetrieverSpeed();	
     }
 
     // Make this return true when this Command no longer needs to run execute()
