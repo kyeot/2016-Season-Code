@@ -31,7 +31,7 @@ public class BasicShooterDrive extends Command {
     	 */
     	Double manipulatorWheelControlAxis = -OI.manipulator.getRawAxis(1);
     	// If the joystick is within 10% of the vertical center of the axis, it's centered
-    	Boolean isCentered = Math.abs(manipulatorWheelControlAxis) > 0.1;
+    	Boolean isCentered = Math.abs(manipulatorWheelControlAxis) < 0.1;
     	// Map the input value (1 -> -1) to a more... Useful range (0 -> 1)
     	Double scaledManipulatorWheelOutput = ((manipulatorWheelControlAxis + 1) / 2.0);
     	
