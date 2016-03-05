@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class AutoAimRobot extends PIDCommand {
 	
-	private final static double kp = 0.1;
+	private final static double kp = 1.5;
+	private final static double ki = 0.03;
 	private final static double kd = 0.001;
-	private final static double ki = 0.0;
 	
 	private NetworkTable gripTapeTracking;
 	private NetworkTable gripImageSize;
@@ -29,7 +29,7 @@ public class AutoAimRobot extends PIDCommand {
 	private Double distanceToGoal;
 
     public AutoAimRobot() {
-    	super(kp, kd, ki);
+    	super(kp, ki, kd);
     	
         requires(Robot.driveBase);
         requires(Robot.shooterBase);
@@ -95,13 +95,13 @@ public class AutoAimRobot extends PIDCommand {
 			}
 		}
     	
-    	System.out.println("Enabled: " + getPIDController().isEnabled() + ", Error: " + getPIDController().getAvgError());
+    	System.out.println(distanceToGoal);
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(getPIDController().getError()) < 0.1;
+        return Math.abs(getPIDController().getError()) < 0.05;
     }
 
     // Called once after isFinished returns true
@@ -128,7 +128,6 @@ public class AutoAimRobot extends PIDCommand {
 	//TODO: Set the robot's rotational position based on output
 	@Override
 	protected void usePIDOutput(double output) {
-		System.out.println(output);
-		Robot.driveBase.tankDrive(output, -output);
+		Robot.driveBase.tankDrive(-output, output);
 	}
 }

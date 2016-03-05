@@ -33,8 +33,8 @@ public class OI {
 	public Button liftArm = new JoystickButton(manipulator, 4);
 	public Button lowerArm = new JoystickButton(manipulator, 3);
 	
-	public Button alignThenShootButton = new JoystickButton(manipulator, 3);
-	public Button autoAlignButton = new JoystickButton(manipulator, 4);
+	public Button alignThenShootButton = new JoystickButton(manipulator, 8);
+	public Button autoAlignButton = new JoystickButton(manipulator, 7);
 	
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
