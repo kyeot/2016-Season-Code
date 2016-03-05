@@ -32,8 +32,14 @@ public class BallRetriever extends Subsystem {
 		setDefaultCommand(new SetAllZero());
 	}
     
-    public void setRetrieverVbus(double input){
-    	lastRetrieverSpeed = input;
+	public void setRetrieverVbus(double input) {
+    	setRetrieverVbus(input, false);
+	}
+	
+    public void setRetrieverVbus(double input, boolean save){
+    	if (save) {
+    		lastRetrieverSpeed = input;
+    	}
     	leftRetriever.set(input);
     	rightRetriever.set(input);
     }
