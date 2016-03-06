@@ -19,7 +19,7 @@ public class AutoAimRobot extends PIDCommand {
 	private NetworkTable gripTapeTracking;
 	private NetworkTable gripImageSize;
 	
-	private Integer xImageRes = 640;
+	private double[] xImageRes;
 	
 	private Integer largestParticleIndex;
 	private Double largestParticleArea;
@@ -40,13 +40,16 @@ public class AutoAimRobot extends PIDCommand {
     	setSetpoint(0.5);
     	    	
     	gripTapeTracking = NetworkTable.getTable("GRIP/tapeTrackingCountours");
-    	//gripImageSize = NetworkTable.getTable("GRIP/tapeTrackingImageSize");
+    	gripImageSize = NetworkTable.getTable("GRIP/tapeTrackingImageSize");
+    	
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {
     	getPIDController().reset();
     	getPIDController().enable();
+    	
+    	xImageRes = gripImageSize.getNumberArray("x", new double[0]);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -70,7 +73,7 @@ public class AutoAimRobot extends PIDCommand {
 			largestParticleCenterY = gripTapeTracking.getNumberArray("centerX", new double[0])[largestParticleIndex];
 			
 			//Calculate distance to goal
-			distanceToGoal = (20 * xImageRes) / 
+			distanceToGoal = (20 * xImageRes[0]) / 
 					(2 * largestParticleWidth * Math.tan(((RobotMap.PROCESSING_CAMERA_FOV / 2) * Math.PI) / 180));
 			//Adjust calculated distance based upon standard error
 			distanceToGoal = distanceToGoal * 1.12;
@@ -118,7 +121,7 @@ public class AutoAimRobot extends PIDCommand {
 	protected double returnPIDInput() {
 		//Scale the input based upon image resolution to account for changes in image size
 		if (largestParticleCenterY != null) {
-			Double proportionalProcessVariable = largestParticleCenterY / xImageRes;
+			Double proportionalProcessVariable = largestParticleCenterY / xImageRes[0];
 			return proportionalProcessVariable;
 		} else {
 			return -1;
