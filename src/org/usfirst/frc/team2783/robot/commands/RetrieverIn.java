@@ -20,7 +20,7 @@ public class RetrieverIn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.retriever.setRetrieverVbus(0.75, true);
-    	System.out.println("Current of Retriever: " + Robot.PDBoard.getCurrent(3));
+    	System.out.println("3: " + Robot.PDBoard.getCurrent(3) + ", 11: " + Robot.PDBoard.getCurrent(11));
     }
 
     // Make this return true when this Command no longer needs to run execute()
