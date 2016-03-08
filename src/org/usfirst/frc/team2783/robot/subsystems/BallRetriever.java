@@ -3,6 +3,7 @@ package org.usfirst.frc.team2783.robot.subsystems;
 import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.SetAllZero;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -14,6 +15,8 @@ public class BallRetriever extends Subsystem {
 	private VictorSP leftRetriever;
 	private VictorSP rightRetriever;
 	private VictorSP armControl;
+	private DigitalInput armForwardLimit;
+	private DigitalInput armReverseLimit;
 	
 	private double lastRetrieverSpeed = 0.0;
 	
@@ -44,8 +47,18 @@ public class BallRetriever extends Subsystem {
     	rightRetriever.set(input);
     }
     
-    public void setRetrieverArmVbus(double input){
-    	armControl.set(input);
+    public void setRetrieverArmVbus(double input) {
+    	if(armForwardLimit.get() == false && armReverseLimit.get() == false){
+    		armControl.set(input);
+    	} else if(armForwardLimit.get() == true) {
+    		if(input < 0) {
+    			armControl.set(input);
+    		}
+    	} else if(armReverseLimit.get() == true) {
+    		if(input > 0) {
+    			armControl.set(input);
+    		}
+    	}	
     }
     
     public void continueRetrieverSpeed() {
