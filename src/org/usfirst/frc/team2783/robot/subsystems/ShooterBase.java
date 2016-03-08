@@ -2,18 +2,20 @@ package org.usfirst.frc.team2783.robot.subsystems;
 
 import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.BasicShooterDrive;
-
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterBase extends Subsystem {
 	
 	CANTalon shooterWheelMotor;
 	VictorSP verticalAxisMotor;
 	VictorSP ballElevatorMotor;
+	AnalogInput absoluteEncoder;
 
 	public ShooterBase() {
 		super();
@@ -51,6 +53,7 @@ public class ShooterBase extends Subsystem {
 	}
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
+		double range = absoluteEncoder.getAverageVoltage() * 72;
 		verticalAxisMotor.set(vbusOutput);
 	}
 	
