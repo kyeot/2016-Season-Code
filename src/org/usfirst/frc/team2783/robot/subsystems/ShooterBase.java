@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
+import org.usfirst.frc.team2783.robot.Robot;
 import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.BasicShooterDrive;
 
@@ -8,6 +9,7 @@ import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterBase extends Subsystem {
 	
@@ -48,6 +50,7 @@ public class ShooterBase extends Subsystem {
 	public void setWheelSpeedVbus(double vbusOutput) {
 		shooterWheelMotor.changeControlMode(TalonControlMode.PercentVbus);
 		shooterWheelMotor.set(vbusOutput);
+		SmartDashboard.putNumber("Shooter Speed", vbusOutput);
 	}
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
@@ -56,5 +59,6 @@ public class ShooterBase extends Subsystem {
 	
 	public void setBallElevatorVbus(double vbusOutput) {
 		ballElevatorMotor.set(vbusOutput);
+		SmartDashboard.putNumber("Retriever Wheel Speed", vbusOutput);
 	}
 }
