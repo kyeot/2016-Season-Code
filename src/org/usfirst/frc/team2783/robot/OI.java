@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.InAndLift;
 import org.usfirst.frc.team2783.robot.commands.LiftArm;
 import org.usfirst.frc.team2783.robot.commands.LowerArm;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
@@ -35,7 +36,7 @@ public class OI {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		
-		retrieverInButton.toggleWhenPressed(new RetrieverIn());
+		retrieverInButton.toggleWhenPressed(new InAndLift());
 		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
 		
 		liftArm.whileActive(new LiftArm());
