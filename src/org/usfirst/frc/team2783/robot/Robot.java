@@ -1,15 +1,18 @@
 
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.Autonomous;
+import org.usfirst.frc.team2783.robot.commands.autonomous.BasicReverseAuto;
 import org.usfirst.frc.team2783.robot.subsystems.BallRetriever;
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 import org.usfirst.frc.team2783.robot.subsystems.ShooterBase;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,11 +24,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 	
 	public static OI oi;
+	public static Command autonomous;
 	public static final DriveBase driveBase = new DriveBase();
 	public static final ShooterBase shooterBase = new ShooterBase();
 	public static final BallRetriever retriever = new BallRetriever();
-	public static final Autonomous autonomous = new Autonomous();
-
+	private NetworkTable smartDashTable;
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -34,8 +38,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		CameraServer usbCameraServer = CameraServer.getInstance();
         usbCameraServer.setQuality(50);
+        
         //the camera name (ex "cam0") can be found through the roborio web interface
         usbCameraServer.startAutomaticCapture("cam1");
+        this.smartDashTable = NetworkTable.getTable("SmartDashboard");
+        
+        //Populate Autonomous chooser
+        String[] autonomousList = {"Normal Reverse", "None"};
+        this.smartDashTable.putStringArray("Auto List", autonomousList);
     }
 	
 	/**
@@ -53,10 +63,27 @@ public class Robot extends IterativeRobot {
 	/**
 	 * This function is called when the robot enters autonomous.
 	 */
-    public void autonomousInit() {  
+    public void autonomousInit() {
+    	
+    	//Gets the autonomous selector value from the dashboard
+    	String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+    	
+    	//Switches the autonomous mode based on the value from the SmartDashboard
+		switch(autoSelected) {
+			case "Normal Reverse":
+				autonomous = new BasicReverseAuto();
+				break;
+			case "None":
+			default:
+				autonomous = null;
+				break;
+			} 
+    	
     	if(autonomous != null) {
     		autonomous.start();
     	}
+    	
+    	
     }
 
     /**
