@@ -5,6 +5,7 @@ import org.usfirst.frc.team2783.robot.commands.SetAllZero;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -42,6 +43,8 @@ public class BallRetriever extends Subsystem {
     	}
     	leftRetriever.set(input);
     	rightRetriever.set(input);
+    	
+    	SmartDashboard.putNumber("Ball Retriever Speed", input);
     }
     
     public void setRetrieverArmVbus(double input){

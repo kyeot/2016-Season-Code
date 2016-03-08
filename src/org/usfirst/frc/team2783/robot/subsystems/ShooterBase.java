@@ -59,6 +59,5 @@ public class ShooterBase extends Subsystem {
 	
 	public void setBallElevatorVbus(double vbusOutput) {
 		ballElevatorMotor.set(vbusOutput);
-		SmartDashboard.putNumber("Retriever Wheel Speed", vbusOutput);
 	}
 }
