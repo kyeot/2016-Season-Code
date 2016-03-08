@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
+import org.usfirst.frc.team2783.robot.commands.Autonomous;
 import org.usfirst.frc.team2783.robot.subsystems.BallRetriever;
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 import org.usfirst.frc.team2783.robot.subsystems.ShooterBase;
@@ -24,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static final ShooterBase shooterBase = new ShooterBase();
 	public static final BallRetriever retriever = new BallRetriever();
+	public static final Autonomous autonomous = new Autonomous();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -53,6 +54,9 @@ public class Robot extends IterativeRobot {
 	 * This function is called when the robot enters autonomous.
 	 */
     public void autonomousInit() {  
+    	if(autonomous != null) {
+    		autonomous.start();
+    	}
     }
 
     /**
