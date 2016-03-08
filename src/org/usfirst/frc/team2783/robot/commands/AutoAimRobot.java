@@ -3,7 +3,6 @@ package org.usfirst.frc.team2783.robot.commands;
 import org.usfirst.frc.team2783.robot.Robot;
 import org.usfirst.frc.team2783.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -12,14 +11,14 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class AutoAimRobot extends PIDCommand {
 	
-	private final static double kp = 1.5;
-	private final static double ki = 0.03;
+	private final static double kp = 1.2;
+	private final static double ki = 0.01;
 	private final static double kd = 0.001;
 	
 	private NetworkTable gripTapeTracking;
 	private NetworkTable gripImageSize;
 	
-	private double[] xImageRes;
+	private Double xImageRes;
 	
 	private Integer largestParticleIndex;
 	private Double largestParticleArea;
@@ -29,12 +28,11 @@ public class AutoAimRobot extends PIDCommand {
 	private Double distanceToGoal;
 
     public AutoAimRobot() {
-    	super(kp, ki, kd);
+    	super(kp, ki, kd, 0.01);
     	
         requires(Robot.driveBase);
         requires(Robot.shooterBase);
     	
-    	//TODO: Update xImageRes from network tables?
     	//Set the range of the PID's input variable
     	setInputRange(0, 1);
     	setSetpoint(0.5);
@@ -49,8 +47,13 @@ public class AutoAimRobot extends PIDCommand {
     	getPIDController().reset();
     	getPIDController().enable();
     	
-    	xImageRes = gripImageSize.getNumberArray("x", new double[0]);
-    }
+    	try {
+    		xImageRes = gripImageSize.getNumberArray("x", new double[0])[0];
+    	} catch (ArrayIndexOutOfBoundsException exception) {
+    		System.out.println("Errored");
+    		xImageRes = 640.0;
+    	}
+	}
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -73,7 +76,7 @@ public class AutoAimRobot extends PIDCommand {
 			largestParticleCenterY = gripTapeTracking.getNumberArray("centerX", new double[0])[largestParticleIndex];
 			
 			//Calculate distance to goal
-			distanceToGoal = (20 * xImageRes[0]) / 
+			distanceToGoal = (20 * xImageRes) / 
 					(2 * largestParticleWidth * Math.tan(((RobotMap.PROCESSING_CAMERA_FOV / 2) * Math.PI) / 180));
 			//Adjust calculated distance based upon standard error
 			distanceToGoal = distanceToGoal * 1.12;
@@ -104,7 +107,7 @@ public class AutoAimRobot extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(getPIDController().getError()) < 0.05;
+        return Math.abs(getPIDController().getError() + 0.065) < 0.05;
     }
 
     // Called once after isFinished returns true
@@ -121,7 +124,7 @@ public class AutoAimRobot extends PIDCommand {
 	protected double returnPIDInput() {
 		//Scale the input based upon image resolution to account for changes in image size
 		if (largestParticleCenterY != null) {
-			Double proportionalProcessVariable = largestParticleCenterY / xImageRes[0];
+			Double proportionalProcessVariable = largestParticleCenterY / xImageRes;
 			return proportionalProcessVariable;
 		} else {
 			return -1;
