@@ -27,7 +27,7 @@ public class DriveBase extends Subsystem{
     }
     
     public void tankDrive(double leftValue, double rightValue) {
-    	if(OI.manipulator.getRawButton(2) == true) {
+    	if(OI.xBoxController.getRawButton(2) == true) {
     		driveBase.tankDrive(leftValue * 0.30, rightValue * 0.30);
     	} else {
     		driveBase.tankDrive(leftValue, rightValue);
