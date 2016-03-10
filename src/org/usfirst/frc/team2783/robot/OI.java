@@ -23,6 +23,8 @@ public class OI {
 
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
+	Trigger moveForwardTrigger = new Dpad(xBoxController, 0);
+	Trigger moveDownwardTrigger = new Dpad(xBoxController, 180);
 	
 	public Button LiftBallElevatorButton = new JoystickButton(manipulator, 1);
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
@@ -40,6 +42,10 @@ public class OI {
 		
 		liftArm.whileActive(new LiftArm());
 		lowerArm.whileActive(new LowerArm());
+
+		//Gyro drive commands [untested]
+		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
+		//moveDownwardTrigger.whileActive(new GyroCorrectedTankDrive());
 	}
 	
 }
