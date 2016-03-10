@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 		CameraServer usbCameraServer = CameraServer.getInstance();
         usbCameraServer.setQuality(50);
         //the camera name (ex "cam0") can be found through the roborio web interface
-        usbCameraServer.startAutomaticCapture("cam1");
+        usbCameraServer.startAutomaticCapture("cam2");
     }
 	
 	/**
