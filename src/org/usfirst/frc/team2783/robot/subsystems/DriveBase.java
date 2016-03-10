@@ -8,18 +8,14 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class DriveBase extends Subsystem {
-	
-	private RobotDrive driveBase = new RobotDrive(
-			new CANTalon(RobotMap.FRONT_LEFT_MOTOR_ID), 
-			new CANTalon(RobotMap.REAR_LEFT_MOTOR_ID),
-			new CANTalon(RobotMap.FRONT_RIGHT_MOTOR_ID), 
-			new CANTalon(RobotMap.REAR_RIGHT_MOTOR_ID)
-			);
+public class DriveBase extends Subsystem{
+	private CANTalon frontLeftMotor;
+	private CANTalon frontRightMotor;
+	private CANTalon rearLeftMotor;
+	private CANTalon rearRightMotor;
 	
 	private AHRS navSensor;
 	
@@ -31,6 +27,11 @@ public class DriveBase extends Subsystem {
 	     } catch (RuntimeException ex ) {
 	         DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 	     }
+
+		frontLeftMotor = new CANTalon(RobotMap.FRONT_LEFT_MOTOR_ID);
+		frontRightMotor = new CANTalon(RobotMap.FRONT_RIGHT_MOTOR_ID); 
+		rearLeftMotor = new CANTalon(RobotMap.REAR_LEFT_MOTOR_ID);
+		rearRightMotor = new CANTalon(RobotMap.REAR_RIGHT_MOTOR_ID);
 	}
 	
     public void initDefaultCommand() {
@@ -39,10 +40,15 @@ public class DriveBase extends Subsystem {
     
     public void tankDrive(double leftValue, double rightValue) {
     	if(OI.xBoxController.getRawButton(2) == true) {
-    		driveBase.tankDrive(leftValue * 0.30, rightValue * 0.30);
-    	} else {
-    		driveBase.tankDrive(leftValue, rightValue);
+    		leftValue = leftValue * 0.5;
+    		rightValue = rightValue * 0.5;
     	}
+    	
+    	frontLeftMotor.set(leftValue);
+    	rearLeftMotor.set(leftValue);
+    	
+    	frontRightMotor.set(rightValue);
+    	rearRightMotor.set(rightValue);
     }
     
     public AHRS getNavSensor() {
