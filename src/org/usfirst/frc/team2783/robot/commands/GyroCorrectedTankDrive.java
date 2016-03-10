@@ -13,6 +13,8 @@ public class GyroCorrectedTankDrive extends PIDCommand {
 	final public static double kp = 0.1;
 	final public static double ki = 0.01;
 	final public static double kd = 0.0;
+	
+	private Double desiredHeading = 0.0;
 		
     public GyroCorrectedTankDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -23,8 +25,8 @@ public class GyroCorrectedTankDrive extends PIDCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveBase.getNavSensor().zeroYaw();
-    	setSetpoint(0.0);
+    	desiredHeading = Robot.driveBase.getNavSensor().pidGet();
+    	setSetpoint(desiredHeading);
     }
 
     // Called repeatedly when this Command is scheduled to run
