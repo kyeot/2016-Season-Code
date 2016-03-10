@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
+import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.SteerableTankDrive;
 
@@ -37,7 +38,11 @@ public class DriveBase extends Subsystem {
     }
     
     public void tankDrive(double leftValue, double rightValue) {
-    	driveBase.tankDrive(leftValue, rightValue);
+    	if(OI.xBoxController.getRawButton(2) == true) {
+    		driveBase.tankDrive(leftValue * 0.30, rightValue * 0.30);
+    	} else {
+    		driveBase.tankDrive(leftValue, rightValue);
+    	}
     }
     
     public AHRS getNavSensor() {
