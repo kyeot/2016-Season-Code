@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
         usbCameraServer.setQuality(50);
         
         //the camera name (ex "cam0") can be found through the roborio web interface
-        usbCameraServer.startAutomaticCapture("cam1");
+        usbCameraServer.startAutomaticCapture("cam2");
         this.smartDashTable = NetworkTable.getTable("SmartDashboard");
         
         //Populate Autonomous chooser
