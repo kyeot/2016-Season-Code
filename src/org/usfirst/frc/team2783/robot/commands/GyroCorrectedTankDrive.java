@@ -23,7 +23,7 @@ public class GyroCorrectedTankDrive extends PIDCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ahrs.zeroYaw();
+    	Robot.driveBase.getNavSensor().zeroYaw();
     	setSetpoint(0.0);
     }
 
@@ -47,7 +47,7 @@ public class GyroCorrectedTankDrive extends PIDCommand {
 
 	@Override
 	protected double returnPIDInput() {
-		return Robot.ahrs.pidGet();
+		return Robot.driveBase.getNavSensor().pidGet();
 	}
 
 	@Override

@@ -21,16 +21,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	
-	public static AHRS ahrs;
 	public static OI oi;
 	public static final DriveBase driveBase = new DriveBase();
 	
 	public Robot(){
-		 try {
-	         ahrs = new AHRS(SPI.Port.kMXP);
-	     } catch (RuntimeException ex ) {
-	         DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-	     }
+		 
 	}
 	
     /*
