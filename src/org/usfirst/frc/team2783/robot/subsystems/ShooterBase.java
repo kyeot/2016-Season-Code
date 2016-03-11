@@ -55,9 +55,11 @@ public class ShooterBase extends Subsystem {
 	}
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
-		double range = absoluteEncoder.getAverageVoltage() * 72;
 		verticalAxisMotor.set(vbusOutput);
-		SmartDashboard.putNumber("Shooter Angle", range);
+		if (absoluteEncoder != null) {
+			double range = absoluteEncoder.getAverageVoltage() * 72;
+			SmartDashboard.putNumber("Shooter Angle", range);
+		}
 	}
 	
 	public void setBallElevatorVbus(double vbusOutput) {
