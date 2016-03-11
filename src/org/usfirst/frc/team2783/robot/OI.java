@@ -5,12 +5,15 @@ import org.usfirst.frc.team2783.robot.commands.LowerArm;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
 import org.usfirst.frc.team2783.robot.commands.RetrieverOut;
+import org.usfirst.frc.team2783.robot.commands.ShooterAtAndControl;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -24,7 +27,9 @@ public class OI {
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	
-	public Button LiftBallElevatorButton = new JoystickButton(manipulator, 1);
+	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
+	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
+	
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
 	public Button retrieverInButton = new JoystickButton(manipulator, 5);
 	public Button retrieverOutButton = new JoystickButton(manipulator, 6);
@@ -34,6 +39,11 @@ public class OI {
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
+		
+		
+		Command fullSpeedShooter = new ShooterAtAndControl(1.0);
+		fullSpeedShooterTrigger.whenActive(fullSpeedShooter);
+		cancelFullSpeedShooterTrigger.cancelWhenActive(fullSpeedShooter);
 		
 		retrieverInButton.toggleWhenPressed(new RetrieverIn());
 		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
