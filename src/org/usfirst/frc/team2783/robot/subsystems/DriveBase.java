@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveBase extends Subsystem{
 	private CANTalon frontLeftMotor;
@@ -47,26 +48,61 @@ public class DriveBase extends Subsystem{
     		rightValue = rightValue * 0.5;
     	}
     	
+    	//if (DriverStation.getInstance().getMatchTime() < 4) {
+    	if (DriverStation.getInstance().isFMSAttached() && DriverStation.getInstance().getMatchTime() < 4) {
+    		setBrake();
+    	} else {
+    		setCoast();
+    	}
+    	
     	frontLeftMotor.set(leftValue);
     	rearLeftMotor.set(leftValue);
     	
     	frontRightMotor.set(rightValue);
     	rearRightMotor.set(rightValue);
+    	
+    	SmartDashboard.putNumber("Gyro", getYaw());
     }
     
     public AHRS getNavSensor() {
-    	return navSensor;
+    	if (navSensor != null) {
+    		return navSensor;
+    	} else {
+    		return null;
+    	}
     }
     
     public Boolean isMoving() {
-    	return navSensor.isMoving();
+    	if (navSensor != null) {
+    		return navSensor.isMoving();
+    	} else {
+    		return null;
+    	}
     }
     
     public Double getHeading() {
-    	if (navSensor.isMagnetometerCalibrated()) {
+    	if (navSensor != null && navSensor.isMagnetometerCalibrated()) {
     		return (double)navSensor.getFusedHeading();
     	} else {
-    		return (double)navSensor.getYaw() + 180.0;
+    		return null;
     	}
+	}
+    
+    public Double getYaw() {
+    	return (double)navSensor.getYaw();
     }
+     
+    public void setCoast() {
+    	frontLeftMotor.enableBrakeMode(false);
+    	frontRightMotor.enableBrakeMode(false);
+    	rearLeftMotor.enableBrakeMode(false);
+    	rearRightMotor.enableBrakeMode(false);
+    }
+    
+    public void setBrake() {
+    	frontLeftMotor.enableBrakeMode(true);
+    	frontRightMotor.enableBrakeMode(true);
+    	rearLeftMotor.enableBrakeMode(true);
+    	rearRightMotor.enableBrakeMode(true);
+	}
 }

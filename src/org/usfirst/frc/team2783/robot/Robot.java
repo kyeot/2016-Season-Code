@@ -1,7 +1,10 @@
 
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.autonomous.BasicReverseAuto;
+import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Moat;
+import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Ramparts;
+import org.usfirst.frc.team2783.robot.commands.autonomous.modes.ReachDefense;
+import org.usfirst.frc.team2783.robot.commands.autonomous.modes.RoughTerrain;
 import org.usfirst.frc.team2783.robot.subsystems.BallRetriever;
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 import org.usfirst.frc.team2783.robot.subsystems.ShooterBase;
@@ -46,7 +49,7 @@ public class Robot extends IterativeRobot {
         this.smartDashTable = NetworkTable.getTable("SmartDashboard");
         
         //Populate Autonomous chooser
-        String[] autonomousList = {"Normal Reverse", "None"};
+        String[] autonomousList = {"None", "Reach Defense", "Rough Terrain", "Ramparts", "Moat"};
         this.smartDashTable.putStringArray("Auto List", autonomousList);
     }
 	
@@ -70,18 +73,27 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	
     	//Gets the autonomous selector value from the dashboard
-    	String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+    	String autoSelected = SmartDashboard.getString("Auto Selector", "None");
     	
     	//Switches the autonomous mode based on the value from the SmartDashboard
 		switch(autoSelected) {
-			case "Normal Reverse":
-				autonomous = new BasicReverseAuto();
+			case "Reach Defense":
+				autonomous = new ReachDefense();
+				break;
+			case "Rough Terrain":
+				autonomous = new RoughTerrain();
+				break;
+			case "Ramparts":
+				autonomous = new Ramparts();
+				break;
+			case "Moat": 
+				autonomous = new Moat();
 				break;
 			case "None":
 			default:
 				autonomous = null;
 				break;
-			} 
+		} 
     	
     	if(autonomous != null) {
     		autonomous.start();

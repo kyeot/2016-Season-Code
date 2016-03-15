@@ -52,17 +52,7 @@ public class BallRetriever extends Subsystem {
     }
     
     public void setRetrieverArmVbus(double input) {
-    	if(armForwardLimit.get() == false && armReverseLimit.get() == false){
-    		armControl.set(input);
-    	} else if(armForwardLimit.get() == true) {
-    		if(input < 0) {
-    			armControl.set(input);
-    		}
-    	} else if(armReverseLimit.get() == true) {
-    		if(input > 0) {
-    			armControl.set(input);
-    		}
-    	}	
+		armControl.set(input);
     }
     
     public void continueRetrieverSpeed() {
