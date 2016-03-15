@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,6 +25,8 @@ public class OI {
 
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
+	Trigger moveForwardTrigger = new Dpad(xBoxController, 0);
+	Trigger moveDownwardTrigger = new Dpad(xBoxController, 180);
 	
 	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
 	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
@@ -50,6 +51,10 @@ public class OI {
 		
 		liftArm.whileActive(new LiftArm());
 		lowerArm.whileActive(new LowerArm());
+
+		//Gyro drive commands [untested]
+		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
+		//moveDownwardTrigger.whileActive(new GyroCorrectedTankDrive());
 	}
 	
 }
