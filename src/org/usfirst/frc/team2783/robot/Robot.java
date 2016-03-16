@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.autonomous.modes.ChevalDeFrise;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Moat;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Ramparts;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.ReachDefense;
@@ -49,7 +50,7 @@ public class Robot extends IterativeRobot {
         this.smartDashTable = NetworkTable.getTable("SmartDashboard");
         
         //Populate Autonomous chooser
-        String[] autonomousList = {"None", "Reach Defense", "Rough Terrain", "Ramparts", "Moat"};
+        String[] autonomousList = {"None", "Reach Defense", "Rough Terrain", "Ramparts", "Moat", "Cheval de Frise"};
         this.smartDashTable.putStringArray("Auto List", autonomousList);
     }
 	
@@ -88,6 +89,9 @@ public class Robot extends IterativeRobot {
 				break;
 			case "Moat": 
 				autonomous = new Moat();
+				break;
+			case "Cheval de Frise":
+				autonomous = new ChevalDeFrise();
 				break;
 			case "None":
 			default:
