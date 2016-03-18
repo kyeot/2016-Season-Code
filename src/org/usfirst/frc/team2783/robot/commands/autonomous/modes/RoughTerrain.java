@@ -10,6 +10,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RoughTerrain extends CommandGroup {
 
     public RoughTerrain() {
-        addSequential(new AutoDrive(0.7, 0.7, 2.2));
+        addSequential(new AutoDrive(0.7, 0.7, 4.0));
     }
 }
