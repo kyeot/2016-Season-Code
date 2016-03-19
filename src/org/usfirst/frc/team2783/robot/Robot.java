@@ -6,6 +6,7 @@ import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Moat;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Ramparts;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.ReachDefense;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.RoughTerrain;
+import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Spybot;
 import org.usfirst.frc.team2783.robot.subsystems.BallRetriever;
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 import org.usfirst.frc.team2783.robot.subsystems.ShooterBase;
@@ -50,7 +51,7 @@ public class Robot extends IterativeRobot {
         this.smartDashTable = NetworkTable.getTable("SmartDashboard");
         
         //Populate Autonomous chooser
-        String[] autonomousList = {"None", "Reach Defense", "Rough Terrain", "Ramparts", "Moat", "Cheval de Frise"};
+        String[] autonomousList = {"None", "Reach Defense", "Rough Terrain", "Ramparts", "Moat", "Cheval de Frise", "Spybot"};
         this.smartDashTable.putStringArray("Auto List", autonomousList);
     }
 	
@@ -92,6 +93,9 @@ public class Robot extends IterativeRobot {
 				break;
 			case "Cheval de Frise":
 				autonomous = new ChevalDeFrise();
+				break;
+			case "Spybot":
+				autonomous = new Spybot();
 				break;
 			case "None":
 			default:

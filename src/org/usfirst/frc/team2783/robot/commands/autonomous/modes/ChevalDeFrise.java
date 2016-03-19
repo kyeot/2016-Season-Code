@@ -30,7 +30,6 @@ public class ChevalDeFrise extends CommandGroup {
     	
     	addSequential(new AutoDrive(0.5, 0.5, 1.05));
     	addSequential(new AutoArm(-0.7, 1.5));
-    	addSequential(new AutoDrive(-0.2, -0.2, 0.2));
     	addSequential(new AutoDrive(0.7, 0.7, 1.5));
     }
 }
