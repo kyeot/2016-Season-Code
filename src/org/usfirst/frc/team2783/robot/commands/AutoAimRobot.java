@@ -101,8 +101,9 @@ public class AutoAimRobot extends PIDCommand {
 			}
 		}
     	
-    	System.out.println(distanceToGoal);
-
+	  	if (distanceToGoal != null) {
+	  		SmartDashboard.putNumber("DistanceToGoal", distanceToGoal);
+	  	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
