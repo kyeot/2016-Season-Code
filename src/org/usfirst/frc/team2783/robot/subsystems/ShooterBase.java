@@ -58,6 +58,9 @@ public class ShooterBase extends Subsystem {
 	}
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
+		if(Robot.shooterBase.getVerticalAxisVbusAngle() > 0 && Robot.shooterBase.getVerticalAxisVbusAngle() < 270){
+			vbusOutput = 0.0;
+		}
 		verticalAxisMotor.set(vbusOutput);
 		if (absoluteEncoder != null) {
 			double range = absoluteEncoder.getAverageVoltage() * 72;
