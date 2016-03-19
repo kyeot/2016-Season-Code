@@ -45,4 +45,12 @@ public class MovingAverage {
 			return null;
 		}
 	}
+	
+	public void clearValues() {
+		// If the list of stored value's isn't empty
+		if (!storedValues.isEmpty()) {
+			// Clear the backlog 
+			storedValues.clear();
+		}
+	}
 }
