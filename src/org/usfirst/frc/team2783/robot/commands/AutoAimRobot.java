@@ -136,6 +136,18 @@ public class AutoAimRobot extends PIDCommand {
 	//TODO: Set the robot's rotational position based on output
 	@Override
 	protected void usePIDOutput(double output) {
-		Robot.driveBase.tankDrive(-output, output);
+		// Set a minimum speed
+		if (output > 0.05 && output < 0.3) {
+			Robot.driveBase.tankDrive(-0.3, 0.3);
+			
+		// Set a maximum speed
+		} else if (output > 0.85) {
+			Robot.driveBase.tankDrive(-0.85, 0.85);
+			
+		// Use the PID output if in range
+		} else {
+			Robot.driveBase.tankDrive(-output, output);
+		}
+			
 	}
 }
