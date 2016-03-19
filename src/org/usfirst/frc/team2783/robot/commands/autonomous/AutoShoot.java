@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2783.robot.commands;
+package org.usfirst.frc.team2783.robot.commands.autonomous;
 
 import org.usfirst.frc.team2783.robot.Robot;
 
@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FireShooter extends Command {
+public class AutoShoot extends Command {
 	
 	private long commandStartedAt;
 
-    public FireShooter() {
+    public AutoShoot() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.shooterBase);
     }
@@ -24,14 +24,16 @@ public class FireShooter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterBase.setBallElevatorVbus(1);
     	Robot.shooterBase.setWheelSpeedVbus(1);
+    	if(Utility.getFPGATime() > (2500000 + commandStartedAt)){
+    		Robot.shooterBase.setBallElevatorVbus(1);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// If the command has been running for 3 seconds, it's done
-        return Utility.getFPGATime() > (3000000 + commandStartedAt);
+        return Utility.getFPGATime() > (5500000 + commandStartedAt);
     }
 
     // Called once after isFinished returns true
