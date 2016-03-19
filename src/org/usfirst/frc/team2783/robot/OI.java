@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.AdjustShooterAngle;
 import org.usfirst.frc.team2783.robot.commands.AutoAimRobot;
 import org.usfirst.frc.team2783.robot.commands.AutoAimThenShoot;
 import org.usfirst.frc.team2783.robot.commands.LiftArm;
@@ -38,6 +39,7 @@ public class OI {
 	public Button retrieverOutButton = new JoystickButton(manipulator, 6);
 	public Button liftArm = new JoystickButton(manipulator, 4);
 	public Button lowerArm = new JoystickButton(manipulator, 3);
+	public Button easyAngle = new JoystickButton(manipulator, 1);
 	
 	public Button alignThenShootButton = new JoystickButton(manipulator, 8);
 	public Button autoAlignButton = new JoystickButton(manipulator, 7);
@@ -55,6 +57,8 @@ public class OI {
 		
 		retrieverInButton.toggleWhenPressed(new RetrieverIn());
 		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
+		
+		//easyAngle.toggleWhenPressed(new AdjustShooterAngle());
 		
 		liftArm.whileActive(new LiftArm());
 		lowerArm.whileActive(new LowerArm());

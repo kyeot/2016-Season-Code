@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Moat extends CommandGroup {
 
     public Moat() {
-    	 addSequential(new AutoDrive(1.0, 1.0, 3.3));
+    	 addSequential(new AutoDrive(1.0, 1.0, 2.0));
     }
 }
    

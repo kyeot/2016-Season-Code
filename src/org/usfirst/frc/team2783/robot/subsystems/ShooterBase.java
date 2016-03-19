@@ -16,7 +16,6 @@ public class ShooterBase extends Subsystem {
 	CANTalon shooterWheelMotor;
 	VictorSP verticalAxisMotor;
 	VictorSP ballElevatorMotor;
-	AnalogInput absoluteEncoder;
 	AnalogInput verticalEncoder;
 
 	public ShooterBase() {
@@ -59,8 +58,8 @@ public class ShooterBase extends Subsystem {
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
 		verticalAxisMotor.set(vbusOutput);
-		if (absoluteEncoder != null) {
-			double range = absoluteEncoder.getAverageVoltage() * 72;
+		if (verticalEncoder != null) {
+			double range = verticalEncoder.getAverageVoltage() * 72;
 			SmartDashboard.putNumber("Shooter Angle", range);
 		}
 	
