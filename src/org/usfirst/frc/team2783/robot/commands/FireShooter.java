@@ -25,6 +25,7 @@ public class FireShooter extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.shooterBase.setBallElevatorVbus(1);
+    	Robot.shooterBase.setWheelSpeedVbus(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,6 +39,7 @@ public class FireShooter extends Command {
     	//Clean up the values the command used
     	commandStartedAt = 0;
     	Robot.shooterBase.setBallElevatorVbus(0);
+    	Robot.shooterBase.setWheelSpeedVbus(0);
     }
 
     // Called when another command which requires one or more of the same
