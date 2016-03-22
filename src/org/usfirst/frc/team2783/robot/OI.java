@@ -58,7 +58,8 @@ public class OI {
 		retrieverInButton.toggleWhenPressed(new RetrieverIn());
 		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
 		
-		//easyAngle.toggleWhenPressed(new AdjustShooterAngle());
+		easyAngle.whenInactive(new AdjustShooterAngle(0));
+		easyAngle.whenActive(new AdjustShooterAngle(180));
 		
 		liftArm.whileActive(new LiftArm());
 		lowerArm.whileActive(new LowerArm());

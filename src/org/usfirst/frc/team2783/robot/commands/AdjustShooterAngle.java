@@ -15,7 +15,7 @@ public class AdjustShooterAngle extends PIDCommand{
 	
 	public AdjustShooterAngle(double setpoint){
 		super(kp, ki, kd, 0.01);
-		requires(Robot.retriever);
+		requires(Robot.shooterBase);
 		
 		this.setpoint = setpoint;
 	}
@@ -38,7 +38,6 @@ public class AdjustShooterAngle extends PIDCommand{
 
 	@Override
 	protected void end() {
-				
 	}
 
 	@Override
