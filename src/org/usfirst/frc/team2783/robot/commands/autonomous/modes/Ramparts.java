@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Ramparts extends CommandGroup {
 
     public Ramparts() {
-    	 addSequential(new AutoDrive(0.8, 0.8, 6));
+    	 addSequential(new AutoDrive(0.8, 0.8, 2.5));
     }
 }
    
