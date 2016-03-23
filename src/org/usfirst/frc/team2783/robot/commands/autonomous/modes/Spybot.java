@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Spybot extends CommandGroup {
 
     public Spybot() {
-    	addParallel(new AutoArm(-0.7, 1.2));
-    	addSequential(new AutoShoot(1, 1, 3, 2.5));
+    	addParallel(new AutoArm(-0.7, 0.8));
+    	addSequential(new AutoShoot(1));
     }
 }
