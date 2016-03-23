@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.FineControl;
 import org.usfirst.frc.team2783.robot.commands.LiftArm;
 import org.usfirst.frc.team2783.robot.commands.LowerArm;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
@@ -27,6 +28,7 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	Trigger moveForwardTrigger = new Dpad(xBoxController, 0);
 	Trigger moveDownwardTrigger = new Dpad(xBoxController, 180);
+	Button fineControlButton = new JoystickButton(xBoxController, 0);
 	
 	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
 	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
@@ -40,6 +42,8 @@ public class OI {
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
+		
+		fineControlButton.toggleWhenPressed(new FineControl());
 		
 		
 		Command fullSpeedShooter = new ShooterAtAndControl(1.0);
