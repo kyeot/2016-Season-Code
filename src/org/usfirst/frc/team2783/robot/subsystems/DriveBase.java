@@ -43,11 +43,6 @@ public class DriveBase extends Subsystem{
     }
     
     public void tankDrive(double leftValue, double rightValue) {
-    	if(OI.xBoxController.getRawButton(2) == true) {
-    		leftValue = leftValue * 0.5;
-    		rightValue = rightValue * 0.5;
-
-    	}
     	
     	//if (DriverStation.getInstance().getMatchTime() < 4) {
     	if (DriverStation.getInstance().isFMSAttached() && DriverStation.getInstance().getMatchTime() < 4) {
