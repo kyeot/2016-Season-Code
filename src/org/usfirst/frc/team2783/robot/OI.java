@@ -28,7 +28,7 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	Trigger moveForwardTrigger = new Dpad(xBoxController, 0);
 	Trigger moveDownwardTrigger = new Dpad(xBoxController, 180);
-	Button fineControlButton = new JoystickButton(xBoxController, 0);
+	Button fineControlButton = new JoystickButton(xBoxController, 2);
 	
 	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
 	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
