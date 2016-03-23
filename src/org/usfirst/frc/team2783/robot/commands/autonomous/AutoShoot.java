@@ -11,10 +11,18 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoShoot extends Command {
 	
 	private long commandStartedAt;
+	private double elevatorWait;
+	private double runTime;
+	private double elevatorSpeed;
+	private double shooterSpeed;
 
-    public AutoShoot() {
+    public AutoShoot(double shooterSpeed, double elevatorSpeed, double elevatorWait, double runTime) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.shooterBase);
+        this.elevatorWait = elevatorWait;
+        this.runTime = runTime;
+        this.elevatorSpeed = elevatorSpeed;
+        this.shooterSpeed = shooterSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -24,16 +32,16 @@ public class AutoShoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterBase.setWheelSpeedVbus(1);
-    	if(Utility.getFPGATime() > (2500000 + commandStartedAt)){
-    		Robot.shooterBase.setBallElevatorVbus(1);
+    	Robot.shooterBase.setWheelSpeedVbus(shooterSpeed);
+    	if(Utility.getFPGATime() > (elevatorWait * 1000000 + commandStartedAt)){
+    		Robot.shooterBase.setBallElevatorVbus(elevatorSpeed);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// If the command has been running for 3 seconds, it's done
-        return Utility.getFPGATime() > (5500000 + commandStartedAt);
+        return Utility.getFPGATime() > (runTime * 1000000 + commandStartedAt);
     }
 
     // Called once after isFinished returns true

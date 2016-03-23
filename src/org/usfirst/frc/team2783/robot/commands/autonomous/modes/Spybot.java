@@ -12,6 +12,6 @@ public class Spybot extends CommandGroup {
 
     public Spybot() {
     	addParallel(new AutoArm(-0.7, 1.2));
-    	addSequential(new AutoShoot());
+    	addSequential(new AutoShoot(1, 1, 3, 2.5));
     }
 }
