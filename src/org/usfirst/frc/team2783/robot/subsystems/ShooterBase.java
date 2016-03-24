@@ -1,8 +1,8 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
-import org.usfirst.frc.team2783.robot.Robot;
 import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.BasicShooterDrive;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -18,6 +18,9 @@ public class ShooterBase extends Subsystem {
 	VictorSP ballElevatorMotor;
 	AnalogInput absoluteEncoder;
 	AnalogInput verticalEncoder;
+	
+	private final Double MAX_VERTICAL_ADJUSTER_POSITION = 270.0;
+	private final Double MIN_VERTICAL_ADJUSTER_POSITION = 60.0;
 
 	public ShooterBase() {
 		super();
@@ -58,23 +61,34 @@ public class ShooterBase extends Subsystem {
 	}
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
-		if(Robot.shooterBase.getVerticalAxisVbusAngle() > 0 && Robot.shooterBase.getVerticalAxisVbusAngle() < 270){
-			vbusOutput = 0.0;
+		if (getVerticalAxisAngle() <= MIN_VERTICAL_ADJUSTER_POSITION) {
+			if (vbusOutput > 0) {
+				verticalAxisMotor.set(vbusOutput);
+			} else {
+				verticalAxisMotor.set(0.0);
+			}
+		} else if (getVerticalAxisAngle() >= MAX_VERTICAL_ADJUSTER_POSITION) {
+			if (vbusOutput < 0) {
+				verticalAxisMotor.set(vbusOutput);
+			} else {
+				verticalAxisMotor.set(0.0);
+			}
+		} else {
+			verticalAxisMotor.set(vbusOutput);
 		}
-		verticalAxisMotor.set(vbusOutput);
-		if (absoluteEncoder != null) {
-			double range = absoluteEncoder.getAverageVoltage() * 72;
-			SmartDashboard.putNumber("Shooter Angle", range);
-		}
-	
+		
+		SmartDashboard.putNumber("Shooter Angle", getVerticalAxisAngle());
 	}
 	
 	public void setBallElevatorVbus(double vbusOutput) {
 		ballElevatorMotor.set(vbusOutput);
 	}
 	
-	public double getVerticalAxisVbusAngle(){
-		double verticalAxisAngle = (verticalEncoder.getVoltage()*72);
-		return verticalAxisAngle;
+	public double getVerticalAxisAngle(){
+		if (verticalEncoder != null) {
+			return (verticalEncoder.getVoltage() * 72);
+		} else {
+			return -1.0;
+		}
 	}
 }
