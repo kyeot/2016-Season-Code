@@ -5,6 +5,7 @@ import org.usfirst.frc.team2783.robot.commands.LowerArm;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
 import org.usfirst.frc.team2783.robot.commands.RetrieverOut;
+import org.usfirst.frc.team2783.robot.commands.SetVerticalAxisAngle;
 import org.usfirst.frc.team2783.robot.commands.ShooterAtAndControl;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
@@ -31,6 +32,8 @@ public class OI {
 	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
 	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
 	
+	Button setAngleTo45 = new JoystickButton(manipulator, 1);
+	
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
 	public Button retrieverInButton = new JoystickButton(manipulator, 5);
 	public Button retrieverOutButton = new JoystickButton(manipulator, 6);
@@ -45,6 +48,8 @@ public class OI {
 		Command fullSpeedShooter = new ShooterAtAndControl(1.0);
 		fullSpeedShooterTrigger.whenActive(fullSpeedShooter);
 		cancelFullSpeedShooterTrigger.cancelWhenActive(fullSpeedShooter);
+		
+		setAngleTo45.whenActive(new SetVerticalAxisAngle(45.0));
 		
 		retrieverInButton.toggleWhenPressed(new RetrieverIn());
 		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
