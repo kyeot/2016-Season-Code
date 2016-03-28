@@ -101,4 +101,24 @@ public class DriveBase extends Subsystem{
     	rearLeftMotor.enableBrakeMode(true);
     	rearRightMotor.enableBrakeMode(true);
 	}
+    
+    public void frontLeftDrive(double value) {
+    	frontLeftMotor.set(value);
+    }
+    
+    public void frontRightDrive(double value) {
+    	frontRightMotor.set(value);
+    }
+    
+    public void rearLeftDrive(double value) {
+    	rearLeftMotor.set(value);
+    }
+    
+    public void rearRightDrive(double value) {
+    	rearRightMotor.set(value);
+    }
 }
+
+
+
+
