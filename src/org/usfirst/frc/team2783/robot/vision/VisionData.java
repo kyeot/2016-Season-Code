@@ -11,16 +11,29 @@ public class VisionData {
 	private static NetworkTable sizeDataTable;
 	private static NetworkTable contourDataTable;
 	
-	private ImageSize imageSize;
-	
-	private ArrayList<Contour> contourArray = new ArrayList<>();
-	private ArrayList<Contour> goalArray = new ArrayList<>();
-	private ArrayList<Contour> sortedGoals = new ArrayList<>();
-	
-	private Contour[] contourFilterArray;
+	ImageSize imageSize;
 	
 	public enum ImageSize {
-		R640x480, R320x240, R160x120
+		R640x480 (640, 480),
+		R320x240 (320, 240),
+		R160x120 (160, 120);
+		
+		private final double x;
+		private final double y;
+		
+		ImageSize(double x, double y){
+			this.x = x;
+			this.y = y;
+		}
+		
+		public double getX() {
+			return x;
+		}
+
+		public double getY() {
+			return y;
+		}
+
 	}
 	
 	public VisionData(){
@@ -30,11 +43,14 @@ public class VisionData {
 	
 	public ImageSize getImageSize(){
 		
-		if(sizeDataTable.getString("x", "None") == "640" && sizeDataTable.getString("y", "None") == "480"){
+		String xSizeString = sizeDataTable.getString("x", "None");
+		String ySizeString = sizeDataTable.getString("y", "None");
+		
+		if(xSizeString == "640" && ySizeString == "480"){
 			imageSize = ImageSize.R640x480;
-		} else if(sizeDataTable.getString("x", "None") == "320" && sizeDataTable.getString("y", "None") == "240"){
+		} else if(xSizeString == "320" && ySizeString == "240"){
 			imageSize = ImageSize.R320x240;
-		} else if(sizeDataTable.getString("x", "None") == "160" && sizeDataTable.getString("y", "None") == "120"){
+		} else if(xSizeString == "160" && ySizeString == "120"){
 			imageSize = ImageSize.R160x120;
 		} else {
 			imageSize = null;
@@ -45,17 +61,19 @@ public class VisionData {
 	}
 	
 	public ArrayList<Contour> getContours(){
-
+		
+		ArrayList<Contour> contourArray = new ArrayList<>();
+		
 		double[] contourArea = contourDataTable.getNumberArray("area", new double[0]);
 		double[] contourCenterX = contourDataTable.getNumberArray("centerX", new double[0]);
 		double[] contourCenterY = contourDataTable.getNumberArray("centerY", new double[0]);
 		double[] contourWidth = contourDataTable.getNumberArray("width", new double[0]);
 		double[] contourHeight = contourDataTable.getNumberArray("height", new double[0]);
-		double[] contourSolidarity = contourDataTable.getNumberArray("solidarity", new double[0]);
+		double[] contourSolidity = contourDataTable.getNumberArray("solidity", new double[0]);
 		
 		if(contourArea != null){
 			for(int i=0; i > contourArea.length; i++){
-				contourArray.add(new Contour(contourArea[i], contourCenterX[i], contourCenterY[i], contourWidth[i], contourHeight[i], contourSolidarity[i]));
+				contourArray.add(new Contour(contourArea[i], contourCenterX[i], contourCenterY[i], contourWidth[i], contourHeight[i], contourSolidity[i]));
 			}
 		}
 		
@@ -65,7 +83,8 @@ public class VisionData {
 	
 	public ArrayList<Contour> getGoals(){
 		
-		contourFilterArray = new Contour[getContours().size()];
+		ArrayList<Contour> goalArray = new ArrayList<>();
+		Contour[] contourFilterArray = new Contour[getContours().size()];
 		
 		for(int i = 0; i > contourFilterArray.length; i++){
 			contourFilterArray[i] = getContours().get(i);
@@ -79,6 +98,8 @@ public class VisionData {
 	}
 	
 	public Contour getLargestGoal(){
+		
+		ArrayList<Contour> sortedGoals = new ArrayList<>();
 		
 		sortedGoals = getGoals();
 		Collections.sort(sortedGoals, 
@@ -102,14 +123,7 @@ public class VisionData {
 	
 	public double getDistanceToGoal(){
 		
-		double resX = 0;
-		if(getImageSize() == ImageSize.R640x480){
-			resX = 640;
-		} else if(getImageSize() == ImageSize.R320x240){
-			resX = 320;
-		} else if(getImageSize() == ImageSize.R160x120){
-			resX = 160;
-		}
+		double resX = imageSize.x;
 		
 		return (20*resX)/(2*(getLargestGoal().getWidth())*Math.tan(67));
 		
