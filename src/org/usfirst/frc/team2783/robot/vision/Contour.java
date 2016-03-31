@@ -1,8 +1,6 @@
 package org.usfirst.frc.team2783.robot.vision;
 
-import edu.wpi.first.wpilibj.util.SortedVector.Comparator;
-
-public class Contour implements Comparable<Contour>{
+public class Contour {
 	
 	private double area;
 	private double centerX;
@@ -67,12 +65,4 @@ public class Contour implements Comparable<Contour>{
 	public void setSolidity(double solidity) {
 		this.solidity = solidity;
 	}
-
-	@Override
-	public int compareTo(Contour contourArea) {
-		int compare = (int) contourArea.getArea();
-		return  compare - ((int) this.getArea());
-	}
-
-	
 }

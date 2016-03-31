@@ -2,6 +2,7 @@ package org.usfirst.frc.team2783.robot.vision;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -80,7 +81,20 @@ public class VisionData {
 	public Contour getLargestGoal(){
 		
 		sortedGoals = getGoals();
-		Collections.sort(sortedGoals);
+		Collections.sort(sortedGoals, 
+			new Comparator<Contour>() {
+				@Override
+				public int compare(Contour cont1, Contour cont2) {
+					if (cont1.getArea() < cont2.getArea()) {
+						return -1;
+					} else if (cont1.getArea() > cont2.getArea()) {
+						return 1;
+					} else {
+						return 0;
+					}
+				}
+			}
+		);
 		
 		return sortedGoals.get(0);
 		
