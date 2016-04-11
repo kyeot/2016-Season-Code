@@ -72,7 +72,7 @@ public class ShooterBase extends Subsystem {
 				vbusOutput = 0;
 			}
 		}
-		if(Math.abs(vbusOutput) > 0.2){
+		if(Math.abs(vbusOutput) > 0.4){
 			verticalAxisMotor.set(vbusOutput);
 			if (absoluteEncoder != null) {
 				double range = absoluteEncoder.getAverageVoltage() * 72;
