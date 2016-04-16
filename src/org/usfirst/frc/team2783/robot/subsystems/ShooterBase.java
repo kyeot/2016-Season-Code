@@ -66,18 +66,21 @@ public class ShooterBase extends Subsystem {
 			if(vbusOutput > 0) {
 				vbusOutput = 0;
 			}
-		}
-		if(bottomLimitSwitch.get()){
+		} else if(bottomLimitSwitch.get()){
 			if(vbusOutput < 0) {
 				vbusOutput = 0;
 			}
 		}
-		if(Math.abs(vbusOutput) > 0.4){
+		System.out.println(vbusOutput);
+		if(Math.abs(vbusOutput) > 0.2){
 			verticalAxisMotor.set(vbusOutput);
-			if (absoluteEncoder != null) {
-				double range = absoluteEncoder.getAverageVoltage() * 72;
-				SmartDashboard.putNumber("Shooter Angle", range);
-			}
+		} else {
+			verticalAxisMotor.set(0.0);
+		}
+		
+		if (absoluteEncoder != null) {
+			double range = absoluteEncoder.getAverageVoltage() * 72;
+			SmartDashboard.putNumber("Shooter Angle", range);
 		}
 	}
 	
