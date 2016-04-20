@@ -1,31 +1,37 @@
 package org.usfirst.frc.team2783.robot.commands;
 
+import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.Robot;
+import org.usfirst.frc.team2783.robot.subsystems.BallRetriever.RetrieverDirection;
+import org.usfirst.frc.team2783.robot.util.DiscreteToggle;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LiftArm extends Command {
-
-    public LiftArm() {
-        requires(Robot.retriever);
+public class ToggleRetriever extends Command {
+	
+	private RetrieverDirection direction;
+	
+    public ToggleRetriever(RetrieverDirection direction) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	this.direction = direction;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.retriever.toggleRetriever(direction);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.retriever.setRetrieverArmVbus(.5);
-    	Robot.retriever.continueRetrieverSpeed();	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

@@ -1,26 +1,37 @@
 package org.usfirst.frc.team2783.robot.commands;
 
 import org.usfirst.frc.team2783.robot.Robot;
+import org.usfirst.frc.team2783.robot.util.DiscreteToggle;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LowerArm extends Command {
+public class UpdateRetriever extends Command {
 
-    public LowerArm() {
-        requires(Robot.retriever);
+    public UpdateRetriever() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	
+    	retrieverInToggle = new DiscreteToggle();
+    	retrieverOutToggle = new DiscreteToggle();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
+    	if(retrieverInToggle.getValue()) {
+    		Robot.retriever.setRetrieverArmVbus(0.75);
+    	}
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.retriever.setRetrieverArmVbus(-.5);
-    	Robot.retriever.continueRetrieverSpeed();
+    	
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
