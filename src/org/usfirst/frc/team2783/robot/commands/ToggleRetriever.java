@@ -17,6 +17,8 @@ public class ToggleRetriever extends Command {
     public ToggleRetriever(RetrieverDirection direction) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.retriever);
+    	
     	this.direction = direction;
     }
 

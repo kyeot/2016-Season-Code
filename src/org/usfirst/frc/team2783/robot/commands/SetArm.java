@@ -15,6 +15,8 @@ public class SetArm extends Command {
     public SetArm(ArmDirection direction) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.retriever);
+    	
     	this.direction = direction;
     }
 

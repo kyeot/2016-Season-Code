@@ -2,6 +2,7 @@ package org.usfirst.frc.team2783.robot.commands.autonomous.modes;
 
 import org.usfirst.frc.team2783.robot.commands.autonomous.AutoArm;
 import org.usfirst.frc.team2783.robot.commands.autonomous.AutoDrive;
+import org.usfirst.frc.team2783.robot.subsystems.BallRetriever.ArmDirection;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -29,7 +30,7 @@ public class ChevalDeFrise extends CommandGroup {
         // arm.
     	
     	addSequential(new AutoDrive(0.5, 0.5, 1.05));
-    	addSequential(new AutoArm(-0.7, 1.5));
+    	addSequential(new AutoArm(ArmDirection.ARM_DOWN, 1.5));
     	addSequential(new AutoDrive(0.7, 0.7, 1.5));
     }
 }

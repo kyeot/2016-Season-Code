@@ -13,18 +13,12 @@ public class UpdateRetriever extends Command {
     public UpdateRetriever() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	
-    	retrieverInToggle = new DiscreteToggle();
-    	retrieverOutToggle = new DiscreteToggle();
+    	requires(Robot.retriever);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	if(retrieverInToggle.getValue()) {
-    		Robot.retriever.setRetrieverArmVbus(0.75);
-    	}
-    	
+    	Robot.retriever.updateRetriever();
     }
 
     // Called repeatedly when this Command is scheduled to run
