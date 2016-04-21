@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +22,8 @@ public class ShooterBase extends Subsystem {
 	
 	DigitalInput topLimitSwitch;
 	DigitalInput bottomLimitSwitch;
+	
+	Encoder quadEncoder;
 
 	public ShooterBase() {
 		super();
@@ -44,6 +47,10 @@ public class ShooterBase extends Subsystem {
 		
 		//Instantiate the motor controller for the elevator that lifts the ball into the shooter
 		ballElevatorMotor = new VictorSP(RobotMap.BALL_ELEVATOR_PWM_PORT);
+		
+		//Instantiates a quadrature encoder
+		quadEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3));
+		quadEncoder.reset();
 	}
 
 	public void initDefaultCommand() {
@@ -78,10 +85,22 @@ public class ShooterBase extends Subsystem {
 			verticalAxisMotor.set(0.0);
 		}
 		
+		System.out.println(getQuadEncoderPercent());
+		
 		if (absoluteEncoder != null) {
 			double range = absoluteEncoder.getAverageVoltage() * 72;
 			SmartDashboard.putNumber("Shooter Angle", range);
-		}
+			
+		}		
+	}
+	
+	public double getQuadEncoderPercent(){
+		return -quadEncoder.getDistance() / 9.7025;
+		
+	}
+	
+	public void resetQuadEncoder(){
+		quadEncoder.reset();
 	}
 	
 	public void setBallElevatorVbus(double vbusOutput) {
