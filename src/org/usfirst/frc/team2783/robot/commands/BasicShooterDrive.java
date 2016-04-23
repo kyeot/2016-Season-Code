@@ -31,7 +31,7 @@ public class BasicShooterDrive extends Command {
     	 */
     	Double manipulatorWheelControlAxis = -OI.manipulator.getRawAxis(1);
     	// If the joystick is within 10% of the vertical center of the axis, it's centered
-    	Boolean isCentered = Math.abs(manipulatorWheelControlAxis) < 0.1;
+    	Boolean isCentered = Math.abs(manipulatorWheelControlAxis) < 0.2;
     	// Map the input value (1 -> -1) to a more... Useful range (0 -> 1)
     	Double scaledManipulatorWheelOutput = ((manipulatorWheelControlAxis + 1) / 2.0);
     	
@@ -54,7 +54,7 @@ public class BasicShooterDrive extends Command {
     	
     	
 		// Set the vertical angle adjuster based on axis 5 and a scaler
-    	double verticalAxisAdjusterVbus = -OI.manipulator.getRawAxis(5) * 0.75; 
+    	double verticalAxisAdjusterVbus = -OI.manipulator.getRawAxis(5); 
     	Robot.shooterBase.setVerticalAxisVbus(verticalAxisAdjusterVbus);
     	
     	
@@ -75,5 +75,6 @@ public class BasicShooterDrive extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	this.wheelSpeed = 0.0;
     }
 }

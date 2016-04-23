@@ -1,16 +1,19 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.FineControl;
 import org.usfirst.frc.team2783.robot.commands.LiftArm;
 import org.usfirst.frc.team2783.robot.commands.LowerArm;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
 import org.usfirst.frc.team2783.robot.commands.RetrieverOut;
+import org.usfirst.frc.team2783.robot.commands.ShooterAtAndControl;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -23,8 +26,13 @@ public class OI {
 
 	Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
+	Trigger moveForwardTrigger = new Dpad(xBoxController, 0);
+	Trigger moveDownwardTrigger = new Dpad(xBoxController, 180);
+	Button fineControlButton = new JoystickButton(xBoxController, 2);
 	
-	public Button LiftBallElevatorButton = new JoystickButton(manipulator, 1);
+	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
+	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
+	
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
 	public Button retrieverInButton = new JoystickButton(manipulator, 5);
 	public Button retrieverOutButton = new JoystickButton(manipulator, 6);
@@ -35,11 +43,22 @@ public class OI {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		
+		fineControlButton.toggleWhenPressed(new FineControl());
+		
+		
+		Command fullSpeedShooter = new ShooterAtAndControl(1.0);
+		fullSpeedShooterTrigger.whenActive(fullSpeedShooter);
+		cancelFullSpeedShooterTrigger.cancelWhenActive(fullSpeedShooter);
+		
 		retrieverInButton.toggleWhenPressed(new RetrieverIn());
 		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
 		
 		liftArm.whileActive(new LiftArm());
 		lowerArm.whileActive(new LowerArm());
+
+		//Gyro drive commands [untested]
+		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
+		//moveDownwardTrigger.whileActive(new GyroCorrectedTankDrive());
 	}
 	
 }
