@@ -5,6 +5,7 @@ import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
 import org.usfirst.frc.team2783.robot.subsystems.BallRetriever;
 import org.usfirst.frc.team2783.robot.subsystems.DriveBase;
 import org.usfirst.frc.team2783.robot.subsystems.ShooterBase;
+import org.usfirst.frc.team2783.robot.util.CustomLogger;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static final ShooterBase shooterBase = new ShooterBase();
 	public static final BallRetriever retriever = new BallRetriever();
+	public static final CustomLogger logger = new CustomLogger();
 
     /**
      * This function is run when the robot is first started up and should be
