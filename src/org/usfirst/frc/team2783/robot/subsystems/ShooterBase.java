@@ -25,6 +25,8 @@ public class ShooterBase extends Subsystem {
 	
 	Encoder quadEncoder;
 
+	Double ENCODER_TICKS_FOR_ADUJSTER_TRAVEL = 100.0;
+	
 	public ShooterBase() {
 		super();
 		
@@ -94,9 +96,8 @@ public class ShooterBase extends Subsystem {
 		}		
 	}
 	
-	public double getQuadEncoderPercent(){
-		return -quadEncoder.getDistance() / 9.7025;
-		
+	public Double getQuadEncoderPercent(){
+		return Math.abs(quadEncoder.getDistance() / ENCODER_TICKS_FOR_ADUJSTER_TRAVEL);
 	}
 	
 	public void resetQuadEncoder(){
@@ -105,5 +106,21 @@ public class ShooterBase extends Subsystem {
 	
 	public void setBallElevatorVbus(double vbusOutput) {
 		ballElevatorMotor.set(vbusOutput);
+	}
+	
+	public double getVerticalAxisAngle(){
+		if (quadEncoder != null) {
+			return (getQuadEncoderPercent());
+		} else {
+			return -1.0;
+		}
+	}
+	
+	public Boolean isBottomLimit() {
+		return bottomLimitSwitch.get();
+	}
+	
+	public Boolean isTopLimit() {
+		return topLimitSwitch.get();
 	}
 }
