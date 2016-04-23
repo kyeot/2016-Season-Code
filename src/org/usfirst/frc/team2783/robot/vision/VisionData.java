@@ -8,11 +8,12 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class VisionData {
 
-	private static NetworkTable sizeDataTable;
-	private static NetworkTable contourDataTable;
+	private NetworkTable sizeDataTable;
+	private NetworkTable contourDataTable;
 	
-	ImageSize imageSize;
+	private ImageSize imageSize;
 	
+	// enum that has image sizes to assign to images received with NetworkTables
 	public enum ImageSize {
 		R640x480 (640, 480),
 		R320x240 (320, 240),
@@ -36,6 +37,7 @@ public class VisionData {
 
 	}
 	
+	// Getting NetworkTable values
 	public VisionData(){
 		sizeDataTable = NetworkTable.getTable("GRIP/tapeTrackingImageSize");
 		contourDataTable = NetworkTable.getTable("GRIP/tapeTrackingCountours");
@@ -46,6 +48,7 @@ public class VisionData {
 		String xSizeString = sizeDataTable.getString("x", "None");
 		String ySizeString = sizeDataTable.getString("y", "None");
 		
+		// Assign imageSize to enum value by using NetworkTable values
 		if(xSizeString == "640" && ySizeString == "480"){
 			imageSize = ImageSize.R640x480;
 		} else if(xSizeString == "320" && ySizeString == "240"){
@@ -64,6 +67,7 @@ public class VisionData {
 		
 		ArrayList<Contour> contourArray = new ArrayList<>();
 		
+		// Putting image values from NetworkTables into arrays 
 		double[] contourArea = contourDataTable.getNumberArray("area", new double[0]);
 		double[] contourCenterX = contourDataTable.getNumberArray("centerX", new double[0]);
 		double[] contourCenterY = contourDataTable.getNumberArray("centerY", new double[0]);
@@ -71,9 +75,13 @@ public class VisionData {
 		double[] contourHeight = contourDataTable.getNumberArray("height", new double[0]);
 		double[] contourSolidity = contourDataTable.getNumberArray("solidity", new double[0]);
 		
-		if(contourArea != null){
-			for(int i=0; i > contourArea.length; i++){
-				contourArray.add(new Contour(contourArea[i], contourCenterX[i], contourCenterY[i], contourWidth[i], contourHeight[i], contourSolidity[i]));
+		// Using image data arrays to assign one value from each array to a Contour; putting those into an ArrayList
+		if(contourArea.length > 0) {
+			for(int i=0; i >= contourArea.length; i++){
+				contourArray.add(new Contour(
+						contourArea[i], contourCenterX[i], 
+						contourCenterY[i], contourWidth[i], 
+						contourHeight[i], contourSolidity[i]));
 			}
 		}
 		
@@ -83,13 +91,14 @@ public class VisionData {
 	
 	public ArrayList<Contour> getGoals(){
 		
+		ArrayList<Contour> contourFilterArray = getContours();
 		ArrayList<Contour> goalArray = new ArrayList<>();
-		Contour[] contourFilterArray = new Contour[getContours().size()];
 		
-		for(int i = 0; i > contourFilterArray.length; i++){
-			contourFilterArray[i] = getContours().get(i);
-			if((contourFilterArray[i].getArea()/contourFilterArray[i].getWidth()) < 2 || (contourFilterArray[i].getArea()/contourFilterArray[i].getWidth()) > 1){
-				goalArray.add(contourFilterArray[i]);
+		// Filtering getContours by Aspect Ratio and putting them into an ArrayList
+		for(int i = 0; i >= contourFilterArray.size(); i++){
+			double aspectRatio = contourFilterArray.get(i).getWidth()/contourFilterArray.get(i).getHeight();
+			if(aspectRatio < 3 && aspectRatio > .25){
+				goalArray.add(contourFilterArray.get(i));
 			}
 		}
 			
@@ -101,6 +110,7 @@ public class VisionData {
 		
 		ArrayList<Contour> sortedGoals = new ArrayList<>();
 		
+		// Sort getGoals ArrayList by area, highest to lowest
 		sortedGoals = getGoals();
 		Collections.sort(sortedGoals, 
 			new Comparator<Contour>() {
@@ -117,6 +127,8 @@ public class VisionData {
 			}
 		);
 		
+		// Return largest
+		//TODO: get 0 or length - 1
 		return sortedGoals.get(0);
 		
 	}
@@ -125,7 +137,8 @@ public class VisionData {
 		
 		double resX = imageSize.x;
 		
-		return (20*resX)/(2*(getLargestGoal().getWidth())*Math.tan(67));
+		//Using getLargestGoal width and the image size x value, return distance to goal
+		return (20*resX)/(2*(getLargestGoal().getWidth())*Math.tan(1.16937));
 		
 	}
 
