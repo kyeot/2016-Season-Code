@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2783.robot;
 
+import org.usfirst.frc.team2783.robot.commands.AngleAdjusterToLimit;
+import org.usfirst.frc.team2783.robot.commands.AngleAdjusterToLimit.Limit;
 import org.usfirst.frc.team2783.robot.commands.FineControl;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.commands.SetArm;
@@ -32,6 +34,9 @@ public class OI {
 	
 	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
 	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
+	Button adjusterToBottom = new JoystickButton(manipulator, 1);
+	Button adjusterToTop = new JoystickButton(manipulator, 2);
+	
 		
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
 	public Button retrieverInButton = new JoystickButton(manipulator, 5);
@@ -57,6 +62,9 @@ public class OI {
 		fullSpeedShooterTrigger.whenActive(fullSpeedShooter);
 		cancelFullSpeedShooterTrigger.cancelWhenActive(fullSpeedShooter);
 
+		adjusterToTop.whenPressed(new AngleAdjusterToLimit(Limit.TOP_LIMIT));
+		adjusterToBottom.whenPressed(new AngleAdjusterToLimit(Limit.BOTTOM_LIMIT));
+		
 		//Gyro drive commands [untested]
 		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
 		//moveDownwardTrigger.whileActive(new GyroCorrectedTankDrive());
