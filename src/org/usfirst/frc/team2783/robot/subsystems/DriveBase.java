@@ -43,11 +43,6 @@ public class DriveBase extends Subsystem{
     }
     
     public void tankDrive(double leftValue, double rightValue) {
-    	if(OI.xBoxController.getRawButton(2) == true) {
-    		leftValue = leftValue * 0.5;
-    		rightValue = rightValue * 0.5;
-
-    	}
     	
     	//if (DriverStation.getInstance().getMatchTime() < 4) {
     	if (DriverStation.getInstance().isFMSAttached() && DriverStation.getInstance().getMatchTime() < 4) {
@@ -106,4 +101,24 @@ public class DriveBase extends Subsystem{
     	rearLeftMotor.enableBrakeMode(true);
     	rearRightMotor.enableBrakeMode(true);
 	}
+    
+    public void frontLeftDrive(double value) {
+    	frontLeftMotor.set(value);
+    }
+    
+    public void frontRightDrive(double value) {
+    	frontRightMotor.set(value);
+    }
+    
+    public void rearLeftDrive(double value) {
+    	rearLeftMotor.set(value);
+    }
+    
+    public void rearRightDrive(double value) {
+    	rearRightMotor.set(value);
+    }
 }
+
+
+
+

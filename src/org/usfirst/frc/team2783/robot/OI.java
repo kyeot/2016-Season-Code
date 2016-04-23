@@ -1,12 +1,12 @@
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.LiftArm;
-import org.usfirst.frc.team2783.robot.commands.LowerArm;
+import org.usfirst.frc.team2783.robot.commands.FineControl;
 import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
-import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
-import org.usfirst.frc.team2783.robot.commands.RetrieverOut;
-import org.usfirst.frc.team2783.robot.commands.SetVerticalAxisAngle;
+import org.usfirst.frc.team2783.robot.commands.SetArm;
 import org.usfirst.frc.team2783.robot.commands.ShooterAtAndControl;
+import org.usfirst.frc.team2783.robot.commands.ToggleRetriever;
+import org.usfirst.frc.team2783.robot.subsystems.BallRetriever.ArmDirection;
+import org.usfirst.frc.team2783.robot.subsystems.BallRetriever.RetrieverDirection;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,12 +28,11 @@ public class OI {
 	Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
 	Trigger moveForwardTrigger = new Dpad(xBoxController, 0);
 	Trigger moveDownwardTrigger = new Dpad(xBoxController, 180);
+	Button fineControlButton = new JoystickButton(xBoxController, 2);
 	
 	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
 	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
-	
-	Button setAngleTo45 = new JoystickButton(manipulator, 1);
-	
+		
 	public Button ReverseBandsOnArmButton = new JoystickButton(manipulator, 7);
 	public Button retrieverInButton = new JoystickButton(manipulator, 5);
 	public Button retrieverOutButton = new JoystickButton(manipulator, 6);
@@ -44,18 +43,19 @@ public class OI {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
 		
+		fineControlButton.toggleWhenPressed(new FineControl());
+		
+		retrieverInButton.whenPressed(new ToggleRetriever(RetrieverDirection.RET_IN));
+		retrieverOutButton.whenPressed(new ToggleRetriever(RetrieverDirection.RET_OUT));
+		
+		liftArm.whenPressed(new SetArm(ArmDirection.ARM_UP));
+		liftArm.whenReleased(new SetArm(ArmDirection.ARM_STOP));
+		lowerArm.whenPressed(new SetArm(ArmDirection.ARM_DOWN));
+		lowerArm.whenReleased(new SetArm(ArmDirection.ARM_STOP));
 		
 		Command fullSpeedShooter = new ShooterAtAndControl(1.0);
 		fullSpeedShooterTrigger.whenActive(fullSpeedShooter);
 		cancelFullSpeedShooterTrigger.cancelWhenActive(fullSpeedShooter);
-		
-		setAngleTo45.whenActive(new SetVerticalAxisAngle(45.0));
-		
-		retrieverInButton.toggleWhenPressed(new RetrieverIn());
-		retrieverOutButton.toggleWhenPressed(new RetrieverOut());
-		
-		liftArm.whileActive(new LiftArm());
-		lowerArm.whileActive(new LowerArm());
 
 		//Gyro drive commands [untested]
 		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());

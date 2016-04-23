@@ -54,7 +54,7 @@ public class BasicShooterDrive extends Command {
     	
     	
 		// Set the vertical angle adjuster based on axis 5 and a scaler
-    	double verticalAxisAdjusterVbus = -OI.manipulator.getRawAxis(5) * 0.75; 
+    	double verticalAxisAdjusterVbus = -OI.manipulator.getRawAxis(5); 
     	Robot.shooterBase.setVerticalAxisVbus(verticalAxisAdjusterVbus);
     	
     	

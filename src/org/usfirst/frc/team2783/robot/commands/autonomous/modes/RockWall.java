@@ -7,10 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class Ramparts extends CommandGroup {
-
-    public Ramparts() {
-    	 addSequential(new AutoDrive(0.8, 0.8, 2.7));
+public class RockWall extends CommandGroup {
+    
+    public  RockWall() {
+    	addSequential(new AutoDrive(0.7, 0.7, 4.0));
     }
 }
-   

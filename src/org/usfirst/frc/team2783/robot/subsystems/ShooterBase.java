@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,9 +19,8 @@ public class ShooterBase extends PIDSubsystem {
 	
 	CANTalon shooterWheelMotor;
 	VictorSP ballElevatorMotor;
-	AnalogInput absoluteEncoder;
-	
-	
+	Encoder quadEncoder;
+		
 	VictorSP verticalAxisMotor;
 	AnalogInput verticalEncoder;
 	
@@ -32,6 +33,9 @@ public class ShooterBase extends PIDSubsystem {
 	
 	EdgeDetect verticalAxisInputChangeFromZero;
 
+	DigitalInput topLimitSwitch;
+	DigitalInput bottomLimitSwitch;
+	
 	public ShooterBase() {
 		super(kp, ki, kd);
 		
@@ -57,6 +61,16 @@ public class ShooterBase extends PIDSubsystem {
 		getPIDController().setOutputRange(-1, 1);
 		getPIDController().disable();
 		verticalAxisInputChangeFromZero = new EdgeDetect(EdgeType.RISING_EDGE_DETECT);
+
+		topLimitSwitch = new DigitalInput(0);
+		bottomLimitSwitch = new DigitalInput(1);
+		
+		//Instantiate the motor controller for the elevator that lifts the ball into the shooter
+		ballElevatorMotor = new VictorSP(RobotMap.BALL_ELEVATOR_PWM_PORT);
+		
+		//Instantiates a quadrature encoder
+		quadEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3));
+		quadEncoder.reset();
 	}
 
 	public void initDefaultCommand() {
@@ -101,7 +115,16 @@ public class ShooterBase extends PIDSubsystem {
 			}
 		} else {
 			verticalAxisMotor.set(vbusOutput);
-		}
+		}		
+	}
+	
+	public double getQuadEncoderPercent(){
+		return -quadEncoder.getDistance() / 9.7025;
+		
+	}
+	
+	public void resetQuadEncoder(){
+		quadEncoder.reset();
 	}
 	
 	public void setVerticalAxisAngle(Double angle) {
@@ -115,8 +138,8 @@ public class ShooterBase extends PIDSubsystem {
 	}
 	
 	public double getVerticalAxisAngle(){
-		if (verticalEncoder != null) {
-			return (verticalEncoder.getVoltage() * 72);
+		if (quadEncoder != null) {
+			return (getQuadEncoderPercent());
 		} else {
 			return -1.0;
 		}
