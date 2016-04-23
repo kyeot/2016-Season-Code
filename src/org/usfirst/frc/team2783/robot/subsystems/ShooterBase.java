@@ -33,6 +33,8 @@ public class ShooterBase extends PIDSubsystem {
 	DigitalInput topLimitSwitch;
 	DigitalInput bottomLimitSwitch;
 	
+	Double ENCODER_TICKS_FOR_ADUJSTER_TRAVEL = 100.0;
+	
 	public ShooterBase() {
 		super(kp, ki, kd);
 		
@@ -86,10 +88,13 @@ public class ShooterBase extends PIDSubsystem {
 	}
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
+		// If the adjuster is set to an angle and the input just changed from zero
 		if (getPIDController().isEnabled() && verticalAxisInputChangeFromZero.isEdge(vbusOutput != 0)) {
+			// Disable the PID
 			getPIDController().disable();
 		} 
 		
+		// If the PID controller isn't enabled
 		if (!getPIDController().isEnabled()) {
 			driveVerticalAxis(vbusOutput);
 		}
@@ -126,9 +131,8 @@ public class ShooterBase extends PIDSubsystem {
 		}		
 	}
 	
-	public double getQuadEncoderPercent(){
-		return -quadEncoder.getDistance() / 9.7025;
-		
+	public Double getQuadEncoderPercent(){
+		return Math.abs(quadEncoder.getDistance() / ENCODER_TICKS_FOR_ADUJSTER_TRAVEL);
 	}
 	
 	public void resetQuadEncoder(){
@@ -151,6 +155,14 @@ public class ShooterBase extends PIDSubsystem {
 		} else {
 			return -1.0;
 		}
+	}
+	
+	public Boolean isBottomLimit() {
+		return bottomLimitSwitch.get();
+	}
+	
+	public Boolean isTopLimit() {
+		return topLimitSwitch.get();
 	}
 
 	@Override
