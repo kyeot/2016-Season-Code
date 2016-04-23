@@ -28,9 +28,6 @@ public class ShooterBase extends PIDSubsystem {
 	final public static double ki = 0.01;
 	final public static double kd = 0.0;
 	
-	private final Double MAX_VERTICAL_ADJUSTER_POSITION = 270.0;
-	private final Double MIN_VERTICAL_ADJUSTER_POSITION = 60.0;
-	
 	EdgeDetect verticalAxisInputChangeFromZero;
 
 	DigitalInput topLimitSwitch;
@@ -101,18 +98,29 @@ public class ShooterBase extends PIDSubsystem {
 	}
 	
 	private void driveVerticalAxis(double vbusOutput) {
-		if (getVerticalAxisAngle() <= MIN_VERTICAL_ADJUSTER_POSITION) {
+		// If the bottom limit switch is pressed
+		if (bottomLimitSwitch.get()) {
+			// And the adjuster is being driven up
 			if (vbusOutput > 0) {
 				verticalAxisMotor.set(vbusOutput);
+				
+			// And the adjuster is being driven downw
 			} else {
 				verticalAxisMotor.set(0.0);
 			}
-		} else if (getVerticalAxisAngle() >= MAX_VERTICAL_ADJUSTER_POSITION) {
+			
+		// If the top limit is pressed
+		} else if (topLimitSwitch.get()) {
+			// And the adjuster is being driven down
 			if (vbusOutput < 0) {
 				verticalAxisMotor.set(vbusOutput);
+				
+			// And the adjuster is being driven up
 			} else {
 				verticalAxisMotor.set(0.0);
 			}
+			
+		// If no switches are pressed, drive as normal
 		} else {
 			verticalAxisMotor.set(vbusOutput);
 		}		
