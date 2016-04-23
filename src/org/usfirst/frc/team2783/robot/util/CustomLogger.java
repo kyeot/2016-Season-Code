@@ -13,7 +13,7 @@ public class CustomLogger {
 	public CustomLogger(){
 		
 		try {
-			loggingFile = new File("logFile.txt");
+			loggingFile = new File("/src/org/usfirst/frc/team2783/robot/util/logFile.txt");
 			writer = new BufferedWriter(new FileWriter(loggingFile, true));
 			System.out.println(loggingFile.getCanonicalPath());
 		} catch (Exception e) {
