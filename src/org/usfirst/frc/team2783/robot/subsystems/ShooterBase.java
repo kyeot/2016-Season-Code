@@ -94,6 +94,9 @@ public class ShooterBase extends Subsystem {
 			SmartDashboard.putNumber("Shooter Angle", range);
 			
 		}		
+		
+		SmartDashboard.putBoolean("Bottom Limit", bottomLimitSwitch.get());
+		SmartDashboard.putBoolean("Top Limit", topLimitSwitch.get());
 	}
 	
 	public Double getQuadEncoderPercent(){
