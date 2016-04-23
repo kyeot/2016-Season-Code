@@ -129,6 +129,9 @@ public class ShooterBase extends PIDSubsystem {
 		} else {
 			verticalAxisMotor.set(vbusOutput);
 		}		
+		
+		SmartDashboard.putBoolean("Bottom Limit", bottomLimitSwitch.get());
+		SmartDashboard.putBoolean("Top Limit", topLimitSwitch.get());
 	}
 	
 	public Double getQuadEncoderPercent(){
