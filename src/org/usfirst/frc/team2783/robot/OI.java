@@ -7,6 +7,7 @@ import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
 import org.usfirst.frc.team2783.robot.commands.RetrieverIn;
 import org.usfirst.frc.team2783.robot.commands.RetrieverOut;
 import org.usfirst.frc.team2783.robot.commands.ShooterAtAndControl;
+import org.usfirst.frc.team2783.robot.commands.visionenhanced.PivotToTarget;
 import org.usfirst.frc.team2783.robot.triggers.Dpad;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -39,6 +40,8 @@ public class OI {
 	public Button liftArm = new JoystickButton(manipulator, 4);
 	public Button lowerArm = new JoystickButton(manipulator, 3);
 	
+	Button autoAlign = new JoystickButton(xBoxController, 1);
+	
 	public OI() {
 		pivotLeftTrigger.whileActive(new PivotTankDrive());
 		pivotRightTrigger.whileActive(new PivotTankDrive());
@@ -55,6 +58,8 @@ public class OI {
 		
 		liftArm.whileActive(new LiftArm());
 		lowerArm.whileActive(new LowerArm());
+		
+		autoAlign.whenPressed(new PivotToTarget());
 
 		//Gyro drive commands [untested]
 		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
