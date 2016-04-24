@@ -94,6 +94,10 @@ public class VisionData {
 		ArrayList<Contour> contourFilterArray = getContours();
 		ArrayList<Contour> goalArray = new ArrayList<>();
 		
+		// TODO: Filter array based upon aspect ratio (and min area?) of contours
+		goalArray = contourFilterArray;
+		
+		/*
 		// Filtering getContours by Aspect Ratio and putting them into an ArrayList
 		for(int i = 0; i >= contourFilterArray.size(); i++){
 			double aspectRatio = contourFilterArray.get(i).getWidth()/contourFilterArray.get(i).getHeight();
@@ -101,6 +105,7 @@ public class VisionData {
 				goalArray.add(contourFilterArray.get(i));
 			}
 		}
+		*/
 			
 		return goalArray;
 		
