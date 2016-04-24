@@ -25,6 +25,8 @@ public class ShooterBase extends Subsystem {
 	
 	Encoder quadEncoder;
 
+	Double ENCODER_TICKS_FOR_ADUJSTER_TRAVEL = 875.0;
+	
 	public ShooterBase() {
 		super();
 		
@@ -69,38 +71,51 @@ public class ShooterBase extends Subsystem {
 	}
 	
 	public void setVerticalAxisVbus(double vbusOutput) {
-		if(topLimitSwitch.get()){
+		if(isTopLimit()){
 			if(vbusOutput > 0) {
 				vbusOutput = 0;
 			}
-		} else if(bottomLimitSwitch.get()){
+		} else if(isBottomLimit()){
 			if(vbusOutput < 0) {
 				vbusOutput = 0;
 			}
 		}
-		System.out.println(vbusOutput);
+
 		if(Math.abs(vbusOutput) > 0.2){
 			verticalAxisMotor.set(vbusOutput);
 		} else {
 			verticalAxisMotor.set(0.0);
 		}
 		
-		System.out.println(getQuadEncoderPercent());
-		
-		if (absoluteEncoder != null) {
-			double range = absoluteEncoder.getAverageVoltage() * 72;
-			SmartDashboard.putNumber("Shooter Angle", range);
-			
-		}		
+		SmartDashboard.putBoolean("Bottom Limit", bottomLimitSwitch.get());
+		SmartDashboard.putBoolean("Top Limit", topLimitSwitch.get());
+		SmartDashboard.putNumber("Shooter Angle", getVerticalAxisAngle());
 	}
 	
-	public double getQuadEncoderPercent(){
-		return -quadEncoder.getDistance() / 9.7025;
-		
+	public Double getQuadEncoderPercent(){
+		return Math.abs(quadEncoder.get() / ENCODER_TICKS_FOR_ADUJSTER_TRAVEL);
 	}
 	
 	public void resetQuadEncoder(){
 		quadEncoder.reset();
+	}
+	
+	public double getVerticalAxisAngle(){
+		Double angle = 65 - (30 * getQuadEncoderPercent());
+		return angle;
+	}
+	
+	public Boolean isBottomLimit() {
+		if (bottomLimitSwitch.get()) {
+			resetQuadEncoder();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean isTopLimit() {
+		return topLimitSwitch.get();
 	}
 	
 	public void setBallElevatorVbus(double vbusOutput) {
