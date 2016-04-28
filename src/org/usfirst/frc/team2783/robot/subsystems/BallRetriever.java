@@ -75,13 +75,15 @@ public class BallRetriever extends Subsystem {
     	if(this.retrieverInToggle.getValue()) {
     		leftRetriever.set(0.75);
     		rightRetriever.set(0.75);
+        	SmartDashboard.putNumber("Ball Retriever Speed", 0.75);
     	} else if(this.retrieverOutToggle.getValue()) {
     		leftRetriever.set(-0.75);
     		rightRetriever.set(-0.75);
-    		
+        	SmartDashboard.putNumber("Ball Retriever Speed", -0.75);    		
     	} else {
     		leftRetriever.set(0);
     		rightRetriever.set(0);
+        	SmartDashboard.putNumber("Ball Retriever Speed", 0.0);
     	}
     	
     	if(armDirection == ArmDirection.ARM_UP) {
