@@ -3,6 +3,7 @@ package org.usfirst.frc.team2783.robot;
 
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.ChevalDeFrise;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Moat;
+import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Portcullis;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.Ramparts;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.ReachDefense;
 import org.usfirst.frc.team2783.robot.commands.autonomous.modes.RockWall;
@@ -52,7 +53,7 @@ public class Robot extends IterativeRobot {
         this.smartDashTable = NetworkTable.getTable("SmartDashboard");
         
         //Populate Autonomous chooser
-        String[] autonomousList = {"None", "Reach Defense", "Rough Terrain", "Ramparts", "Moat", "Rock Wall", "Cheval de Frise", "Spybot"};
+        String[] autonomousList = {"None", "Reach Defense", "Rough Terrain", "Ramparts", "Moat", "Rock Wall", "Cheval de Frise", "Portcullis", "Spybot"};
         this.smartDashTable.putStringArray("Auto List", autonomousList);
     }
 	
@@ -97,6 +98,9 @@ public class Robot extends IterativeRobot {
 				break;
 			case "Cheval de Frise":
 				autonomous = new ChevalDeFrise();
+				break;
+			case "Portcullis":
+				autonomous = new Portcullis();
 				break;
 			case "Spybot":
 				autonomous = new Spybot();
