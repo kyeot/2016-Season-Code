@@ -85,9 +85,9 @@ public class BallRetriever extends Subsystem {
     	}
     	
     	if(armDirection == ArmDirection.ARM_UP) {
-    		armControl.set(0.75);
+    		armControl.set(0.65);
     	} else if(armDirection == ArmDirection.ARM_DOWN){
-    		armControl.set(-0.75);
+    		armControl.set(-0.65);
     	} else {
     		armControl.set(0);
     	}
