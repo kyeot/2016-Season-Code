@@ -34,6 +34,7 @@ public class OI {
 	
 	Trigger fullSpeedShooterTrigger = new Dpad(manipulator, 0);
 	Trigger cancelFullSpeedShooterTrigger = new Dpad(manipulator, 180);
+	Button reverseShooter = new JoystickButton(xBoxController, 5);
 
 	Button adjusterToBottom = new JoystickButton(manipulator, 7);
 	Button adjusterToTop = new JoystickButton(manipulator, 8);
@@ -61,6 +62,7 @@ public class OI {
 		Command fullSpeedShooter = new ShooterAtAndControl(1.0);
 		fullSpeedShooterTrigger.whenActive(fullSpeedShooter);
 		cancelFullSpeedShooterTrigger.cancelWhenActive(fullSpeedShooter);
+		reverseShooter.whileHeld(new ShooterAtAndControl(-1.0));
 
 		adjusterToTop.whenPressed(new AngleAdjusterToLimit(Limit.TOP_LIMIT));
 		adjusterToBottom.whenPressed(new AngleAdjusterToLimit(Limit.BOTTOM_LIMIT));
