@@ -67,7 +67,6 @@ public class OI {
 		adjusterToTop.whenPressed(new AngleAdjusterToLimit(Limit.TOP_LIMIT));
 		adjusterToBottom.whenPressed(new AngleAdjusterToLimit(Limit.BOTTOM_LIMIT));
 		
-		//g
 		//Gyro drive commands [untested]
 		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
 		//moveDownwardTrigger.whileActive(new GyroCorrectedTankDrive());
