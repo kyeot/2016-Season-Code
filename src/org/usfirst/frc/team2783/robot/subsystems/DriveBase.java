@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
-import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.SteerableTankDrive;
 
@@ -29,10 +28,12 @@ public class DriveBase extends Subsystem{
 	         DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 	     }
 
+		/*
 		frontLeftMotor = new CANTalon(RobotMap.FRONT_LEFT_MOTOR_ID);
 		frontRightMotor = new CANTalon(RobotMap.FRONT_RIGHT_MOTOR_ID); 
 		rearLeftMotor = new CANTalon(RobotMap.REAR_LEFT_MOTOR_ID);
 		rearRightMotor = new CANTalon(RobotMap.REAR_RIGHT_MOTOR_ID);
+		*/
 		
 		frontRightMotor.setInverted(true);
 		rearRightMotor.setInverted(true);
