@@ -29,14 +29,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 
-//public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot {
 	
-	//public static OI oi;
-	//public static Command autonomous;
-	//public static final DriveBase driveBase = new DriveBase();
-	//public static final ShooterBase shooterBase = new ShooterBase();
-	//public static final BallRetriever retriever = new BallRetriever();
-	//public static NetworkTable smartDashTable;
+	public static OI oi;
+	public static Command autonomous;
+	public static final DriveBase driveBase = new DriveBase();
+	public static final ShooterBase shooterBase = new ShooterBase();
+	public static final BallRetriever retriever = new BallRetriever();
+	public static NetworkTable smartDashTable;
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -63,83 +63,83 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 	 * the robot is disabled.
      */
 
-   // public void disabledInit(){
-    //}
+    public void disabledInit(){
+    }
 	
-	//public void disabledPeriodic() {
-		//Scheduler.getInstance().run();
-	//}
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
 	/**
 	 * This function is called when the robot enters autonomous.
 	 */
 	
-    //public void autonomousInit() {
+    public void autonomousInit() {
     	
-    	//Gets the autonomous selector value from the dashboard
-    	///String autoSelected = SmartDashboard.getString("Auto Selector", "None");
+    	Gets the autonomous selector value from the dashboard
+    	String autoSelected = SmartDashboard.getString("Auto Selector", "None");
     	
-    	//Switches the autonomous mode based on the value from the SmartDashboard
-		//switch(autoSelected) {
-			//case "Reach Defense":
-				//autonomous = new ReachDefense();
-				//break;
-			//case "Rough Terrain":
-				//autonomous = new RoughTerrain();
-				//break;
-			//case "Ramparts":
-				//autonomous = new Ramparts();
-				//break;
-			//case "Moat": 
-				//autonomous = new Moat();
-				//break;
-			//case "Rock Wall":
-				//autonomous = new RockWall();
-				//break;
-			//case "Cheval de Frise":
-				//autonomous = new ChevalDeFrise();
-				//break;
-			//case "Portcullis":
-				//autonomous = new Portcullis();
-				//break;
-			//case "Spybot":
-				//autonomous = new Spybot();
-				//break;
-			//case "None":
-			//default:
-				//autonomous = null;
-				//break;
-		//} 
+    	Switches the autonomous mode based on the value from the SmartDashboard
+		switch(autoSelected) {
+			case "Reach Defense":
+				autonomous = new ReachDefense();
+				break;
+			case "Rough Terrain":
+				autonomous = new RoughTerrain();
+				break;
+			case "Ramparts":
+				autonomous = new Ramparts();
+				break;
+			case "Moat": 
+				autonomous = new Moat();
+				break;
+			case "Rock Wall":
+				autonomous = new RockWall();
+				break;
+			case "Cheval de Frise":
+				autonomous = new ChevalDeFrise();
+				break;
+			case "Portcullis":
+				autonomous = new Portcullis();
+				break;
+			case "Spybot":
+				autonomous = new Spybot();
+				break;
+			case "None":
+			default:
+				autonomous = null;
+				break;
+		} 
     	
-    	//if(autonomous != null) {
-    		//autonomous.start();
-    	//}
-    //}
+    	if(autonomous != null) {
+    		autonomous.start();
+    	}
+    }
 
     /**
      * This function is called periodically during autonomous
      */
     
-    //public void autonomousPeriodic() {
-        //Scheduler.getInstance().run();
-   // }
+    public void autonomousPeriodic() {
+        Scheduler.getInstance().run();
+    }
 
-    //public void teleopInit() {
-    //}
+    public void teleopInit() {
+    }
 
     /**
      * This function is called periodically during operator control
      */
     
-    //public void teleopPeriodic() {
-        //Scheduler.getInstance().run();
-    //}
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+    }
     
     /**
      * This function is called periodically during test mode
      */
     
-   // public void testPeriodic() {
-        //LiveWindow.run();
-    //}
-//}
+    public void testPeriodic() {
+        LiveWindow.run();
+    }
+}
