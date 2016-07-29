@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
 import org.usfirst.frc.team2783.robot.RobotMap;
+import org.usfirst.frc.team2783.robot.commands.SwerveDrive;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -38,8 +39,40 @@ public class SwerveDriveBase extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new SwerveDrive());
+    }
+    
+    //TODO: better names
+    public void frontRightDrive(double value) {
+    	frontRightWheel.set(value);
+    }
+    
+    public void frontRightTwist(double value) {
+    	frontRightSwivel.set(value);
+    }
+    
+    public void frontLeftDrive(double value) {
+    	frontLeftWheel.set(value);
+    }
+    
+    public void frontLeftTwist(double value) {
+    	frontLeftSwivel.set(value);
+    }
+    
+    public void rearRightDrive(double value) {
+    	rearRightWheel.set(value);
+    }
+    
+    public void rearRightTwist(double value) {
+    	rearRightSwivel.set(value);
+    }
+    
+    public void rearLeftDrive(double value) {
+    	rearLeftWheel.set(value);
+    }
+    
+    public void rearLeftTwift(double value) {
+    	rearLeftSwivel.set(value);
     }
 }
 
