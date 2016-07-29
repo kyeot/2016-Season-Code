@@ -38,6 +38,8 @@ public class BallRetriever extends Subsystem {
 	private DiscreteToggle retrieverOutToggle;
 	
     public BallRetriever() {
+    	
+    	/*
     	leftRetriever = new VictorSP(RobotMap.BALL_RETRIEVER_LEFT_MOTOR_PWM_PORT);
     	
     	rightRetriever = new VictorSP(RobotMap.BALL_RETRIEVER_RIGHT_MOTOR_PWM_PORT);
@@ -45,6 +47,7 @@ public class BallRetriever extends Subsystem {
     	
     	armControl = new VictorSP(RobotMap.RETRIEVER_ARM_MOTOR_PWM_PORT);
     	armControl.setInverted(true);
+    	*/
     	
     	retrieverInToggle = new DiscreteToggle();
     	retrieverOutToggle = new DiscreteToggle();

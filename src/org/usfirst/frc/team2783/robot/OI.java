@@ -21,10 +21,10 @@ import edu.wpi.first.wpilibj.command.Command;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-//public class OI {
+public class OI {
 	
-	//public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
-	//public static Joystick manipulator = new Joystick(RobotMap.SHOOTER_JOYSTICK_ID);
+	public static Joystick xBoxController = new Joystick(RobotMap.XBOX_CONTROLLER_ID);
+	public static Joystick manipulator = new Joystick(RobotMap.SHOOTER_JOYSTICK_ID);
 
 	//Trigger pivotLeftTrigger = new Dpad(xBoxController, 270);
 	//Trigger pivotRightTrigger = new Dpad(xBoxController, 90);
@@ -45,7 +45,7 @@ import edu.wpi.first.wpilibj.command.Command;
 	//public Button liftArm = new JoystickButton(manipulator, 4);
 	//public Button lowerArm = new JoystickButton(manipulator, 3);
 	
-	//public OI() {
+	public OI() {
 		//pivotLeftTrigger.whileActive(new PivotTankDrive());
 		//pivotRightTrigger.whileActive(new PivotTankDrive());
 		
@@ -70,6 +70,6 @@ import edu.wpi.first.wpilibj.command.Command;
 		//Gyro drive commands [untested]
 		//moveForwardTrigger.whileActive(new GyroCorrectedTankDrive());
 		//moveDownwardTrigger.whileActive(new GyroCorrectedTankDrive());
-	//}
+	}
 	
-//}
+}

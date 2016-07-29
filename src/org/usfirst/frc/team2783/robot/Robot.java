@@ -76,10 +76,10 @@ public class Robot extends IterativeRobot {
 	
     public void autonomousInit() {
     	
-    	Gets the autonomous selector value from the dashboard
+    	//Gets the autonomous selector value from the dashboard
     	String autoSelected = SmartDashboard.getString("Auto Selector", "None");
     	
-    	Switches the autonomous mode based on the value from the SmartDashboard
+    	//Switches the autonomous mode based on the value from the SmartDashboard
 		switch(autoSelected) {
 			case "Reach Defense":
 				autonomous = new ReachDefense();

@@ -31,7 +31,7 @@ public class ShooterBase extends Subsystem {
 		super();
 		
 		//Instantiate and configure the shooter wheel's controller for RPM speed control
-		shooterWheelMotor = new CANTalon(RobotMap.SHOOTER_WHEEL_MOTOR_ID);
+		//shooterWheelMotor = new CANTalon(RobotMap.SHOOTER_WHEEL_MOTOR_ID);
 		shooterWheelMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		shooterWheelMotor.changeControlMode(TalonControlMode.Speed);
 		shooterWheelMotor.configEncoderCodesPerRev(20);
@@ -45,10 +45,10 @@ public class ShooterBase extends Subsystem {
 		bottomLimitSwitch = new DigitalInput(1);
 		
 		//Instantiate the motor controller for the vertical angle adjuster
-		verticalAxisMotor = new VictorSP(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR_PWM_PORT);
+		//verticalAxisMotor = new VictorSP(RobotMap.SHOOTER_VERTICAL_AXIS_MOTOR_PWM_PORT);
 		
 		//Instantiate the motor controller for the elevator that lifts the ball into the shooter
-		ballElevatorMotor = new VictorSP(RobotMap.BALL_ELEVATOR_PWM_PORT);
+		//ballElevatorMotor = new VictorSP(RobotMap.BALL_ELEVATOR_PWM_PORT);
 		
 		//Instantiates a quadrature encoder
 		quadEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3));
