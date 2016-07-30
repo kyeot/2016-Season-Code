@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
-import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.SteerableTankDrive;
 
 import com.kauailabs.navx.frc.AHRS;

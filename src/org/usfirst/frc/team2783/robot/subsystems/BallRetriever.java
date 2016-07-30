@@ -1,10 +1,8 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
-import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.UpdateRetriever;
 import org.usfirst.frc.team2783.robot.util.DiscreteToggle;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,8 +27,8 @@ public class BallRetriever extends Subsystem {
 	private VictorSP leftRetriever;
 	private VictorSP rightRetriever;
 	private VictorSP armControl;
-	private DigitalInput armForwardLimit;
-	private DigitalInput armReverseLimit;
+	//private DigitalInput armForwardLimit;
+	//private DigitalInput armReverseLimit;
 	
 	public ArmDirection armDirection;
 	

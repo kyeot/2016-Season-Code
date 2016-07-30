@@ -4,6 +4,7 @@ import org.usfirst.frc.team2783.robot.RobotMap;
 import org.usfirst.frc.team2783.robot.commands.SwerveDrive;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -40,6 +41,34 @@ public class SwerveDriveBase extends Subsystem {
 
     public void initDefaultCommand() {
         setDefaultCommand(new SwerveDrive());
+    }
+    
+    public void tankDrive(double leftValue, double rightValue) {
+    	if (DriverStation.getInstance().isFMSAttached() && DriverStation.getInstance().getMatchTime() < 4) {
+    		setBrake(true);
+    	} else {
+    		setBrake(false);
+    	}
+    	
+    	frontRightWheel.set(rightValue);
+    	rearRightWheel.set(rightValue);
+    	
+    	frontLeftWheel.set(leftValue);
+    	rearLeftWheel.set(leftValue);
+    }
+    
+    public void setBrake(boolean brake) {
+    	frontRightWheel.enableBrakeMode(brake);
+    	frontRightSwivel.enableBrakeMode(brake);
+    	
+    	frontLeftWheel.enableBrakeMode(brake);
+    	frontLeftSwivel.enableBrakeMode(brake);
+    	
+    	rearRightWheel.enableBrakeMode(brake);
+    	rearRightSwivel.enableBrakeMode(brake);
+    	
+    	rearLeftWheel.enableBrakeMode(brake);
+    	rearLeftSwivel.enableBrakeMode(brake);
     }
     
     //TODO: better names
