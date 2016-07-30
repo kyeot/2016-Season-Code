@@ -1,21 +1,6 @@
 package org.usfirst.frc.team2783.robot;
 
-import org.usfirst.frc.team2783.robot.commands.AngleAdjusterToLimit;
-import org.usfirst.frc.team2783.robot.commands.AngleAdjusterToLimit.Limit;
-import org.usfirst.frc.team2783.robot.commands.FineControl;
-import org.usfirst.frc.team2783.robot.commands.PivotTankDrive;
-import org.usfirst.frc.team2783.robot.commands.SetArm;
-import org.usfirst.frc.team2783.robot.commands.ShooterAtAndControl;
-import org.usfirst.frc.team2783.robot.commands.ToggleRetriever;
-import org.usfirst.frc.team2783.robot.subsystems.BallRetriever.ArmDirection;
-import org.usfirst.frc.team2783.robot.subsystems.BallRetriever.RetrieverDirection;
-import org.usfirst.frc.team2783.robot.triggers.Dpad;
-
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
