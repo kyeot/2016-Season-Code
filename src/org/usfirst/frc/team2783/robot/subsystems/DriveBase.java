@@ -1,8 +1,7 @@
 package org.usfirst.frc.team2783.robot.subsystems;
 
-import org.usfirst.frc.team2783.robot.OI;
 import org.usfirst.frc.team2783.robot.RobotMap;
-import org.usfirst.frc.team2783.robot.commands.SteerableTankDrive;
+import org.usfirst.frc.team2783.robot.commands.BasicTankDrive;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -39,7 +38,7 @@ public class DriveBase extends Subsystem{
 	}
 	
     public void initDefaultCommand() {
-        setDefaultCommand(new SteerableTankDrive());
+        setDefaultCommand(new BasicTankDrive());
     }
     
     public void tankDrive(double leftValue, double rightValue) {
